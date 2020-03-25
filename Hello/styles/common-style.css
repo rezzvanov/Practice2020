@@ -1,0 +1,39 @@
+body, p {
+    margin: 0;
+    padding: 0;
+}
+
+.main-container {
+    background-color: #EAEDF1;
+    width: 1511px;
+}
+
+.common-style {
+    background-color: #FFFFFF;
+    border: 1px solid #F5F7F8;
+}
+
+.marker {
+    color: #16C4EC;
+}
+
+.clearfix::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+@font-face {
+    font-family: "lato";
+    src: url("fonts/Lato/Lato-Regular.ttf") 
+}
+
+@font-face {
+    font-family: "signika";
+    src: url("fonts/Signika/Signika-Regular.ttf")
+}
+
+@font-face {
+    font-family: "signika negative";
+    src: url("fonts/Signika_Negative/SignikaNegative-Regular.ttf")
+}

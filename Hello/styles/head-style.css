@@ -1,0 +1,193 @@
+.profile{
+    width: 433px;
+    float: left;
+    margin-left: 80px;
+    border-radius: 2px;
+    margin-top: 82px;
+}
+
+.photo-profile{
+    width: 146px;
+    height: 148px;
+    float: left;
+    padding: 34px 26px;
+}
+
+.info-profile {
+    width: 219px;
+    height: 140px;
+    padding-top: 76px;
+    float: left;
+    margin-left: 16px;
+}
+
+.info-profile .full-name {
+    font-family: "signika";
+    font-size: 30px;
+}
+
+.info-profile .info {
+    font-family: "lato";
+    font-size: 17px;
+    margin-top: 4px;
+
+}
+
+.profile .button-ans{
+    width: 108px;
+    height: 78px;
+    background-color: #16C4EC;
+    float: left;
+}
+
+.profile .button-lang{
+    width: 109px;
+    height: 78px;
+    background-color: #FA5351;
+    float: left;
+}
+
+.profile .button-car{
+    width: 108px;
+    height: 78px;
+    background-color: #10CDC1;
+    float: left;
+}
+
+.profile .button-smoke{
+    width: 108px;
+    height: 78px;
+    background-color: #33495F;
+    float: right;
+}
+
+.img-ans {
+    position: relative;
+    left: 48px;
+    top: 18px
+}
+
+.img-flag {
+    position: relative;
+    left: 48px;
+    top: 18px
+}
+
+.img-car {
+    position: relative;
+    left: 43px;
+    top: 20px
+}
+
+.img-smoke {
+    position: relative;
+    left: 45px;
+    top: 18px
+}
+
+.icon-name {
+    font-family: lato;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 14px;
+    color: #FFF;
+    margin-top: 24px;
+}
+
+.description {
+    width: 823px;
+    height: 293px;
+    float: right;
+    margin-right: 83px;
+    margin-top: 82px;
+}
+
+.about-me {
+    float: left;
+    padding: 30px 30px 0 30px;
+    width: 402px;
+    color: #33495F;
+}
+
+.about-me .title {
+    font-family: 'signika';
+    font-size: 38px;
+    margin-top: 12px;
+}
+
+
+.about-me .summary {
+    font-family: 'lato';
+    font-size: 18px;
+    line-height: 1.75;
+    text-align: justify;
+    margin-top: 8px;
+    padding-left: 2px;
+}
+
+.social-networks {
+    clear: left;
+    width: 462px;
+}
+
+.social-networks a {
+    width: 77px;
+    height: 72px;
+    float: left;
+    background-color: #33495F;
+    margin: 0;
+}
+
+.social-networks .twitter {
+    background: url('/images/image_twitter.png') no-repeat;
+    background-position: center;
+}
+
+.social-networks .dribble {
+    background: url('/images/image_dribble.png') no-repeat;
+    background-position: 41% 46%;
+}
+
+.social-networks .behance {
+    background: url('/images/image_behance.png') no-repeat;
+    background-position: 41% 46%;
+}
+
+.social-networks .instagram {
+    background: url('/images/image_instagram.png') no-repeat;
+    background-position: 41% 46%;
+}
+
+.social-networks .social-1 {
+    background: url('/images/image_social-1.png') no-repeat;
+    background-position: 36% 46%;
+}
+
+.social-networks .in {
+    background: url('/images/image_in.png') no-repeat;
+    background-position: 22% 50%;
+}
+
+.contact {
+    float: right;
+    font-family: 'signika negative';
+    font-size: 23px;
+    text-align: center;
+    padding-right: 32px;
+}
+
+.contact .e-mail {
+    margin-top: 105px;
+}
+
+.contact .site {
+    color: #FA5351;
+    margin-top: 17px;
+    letter-spacing: 2px;
+}
+
+hr {
+    margin-top: 30px;
+    width: 270px;
+}
+
