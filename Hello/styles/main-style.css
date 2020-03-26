@@ -1,0 +1,189 @@
+.left-card {
+    float: left;
+    width: 609px;
+    border: 1px solid #F5F7F8;
+    /* border-radius: 5px; */
+    background-color: #FFFFFF;
+    margin: 36px 0 0 80px;
+    /* padding-top: 28px;
+    padding-left: 24px; */
+}
+
+.info-card .title {
+    font-family: 'signika';
+    font-size: 25px;
+    color: #33495F;
+}
+
+.info-card span.explanation {
+    font-family: 'lato';
+    font-size: 17px;
+    color: #9EA7B4;
+    margin-left: 8px;
+    letter-spacing: 0.4px;
+}
+
+.info-card .subtitle {
+    font-family: 'signika negative';
+    font-size: 20px;
+    color: #04BCA6;
+    letter-spacing: 0.4px;
+}
+
+.left-card .skills {
+    font-family: 'lato';
+    font-size: 16px;
+    color: #33495F;
+    margin-top: 34px;
+    margin-left: 28px;
+    list-style-image: url(/images/img_check_mark.png);
+    letter-spacing: 0.15px;
+}
+
+.skills li{
+    margin-top: 15px;
+}
+
+.card-bottom {
+    margin-top: 41px;
+}
+
+.card-bottom .position
+{
+    float: left;
+    font-family: 'lato';
+    color: #9EA7B4;
+    /* margin-top: 10px; */
+}
+
+.location .position-img-1 { 
+    position: relative;
+    top: 10px;
+    left: 5px;
+}
+
+.location .position-span-1 {
+    position: relative;
+    top: 9px;
+    left: 10px;
+}
+
+.date .position-img-2 { 
+    position: relative;
+    top: 10px;
+    left: 65px;
+}
+
+.date .position-span-2 {
+    position: relative;
+    top: 9px;
+    left: 68px;
+}
+
+.card-bottom .link {
+    float: right;
+    margin-right: 22px;
+}
+
+.card-bottom .link a {
+    display: block;
+    width: 217px;
+    height: 30px;
+    padding-top: 8px;
+    background-color: #16C4EC;
+    color: #FFFFFF;
+    text-decoration: none;
+    border-radius: 2.5px;
+    font-family: 'signika negative';
+    font-size: 17px;
+    text-align: center;
+    font-display: 0.3px;
+    margin-bottom: 20px;
+}
+
+
+.right-card {
+    float: right;
+    width: 600px;
+    border: 1px solid #DEE3EA;
+    background-color: #DBE1E8;
+    margin: 36px 81px 0 0;
+}
+
+.card {
+    border-radius: 5px;
+    padding-top: 28px;
+    padding-left: 24px;
+}
+
+.right-card .link a {
+    background-color: #10CDC1;
+}
+
+.right-card .title .explanation {
+    font-size: 14px;
+}
+
+.right-card .subtitle {
+    font-size: 17px;
+    color: #00B9D8;
+}
+
+.right-card .card-bottom {
+    margin-top: 30px;
+    margin-left: -4px;
+    font-size: 12px;
+}
+
+.right-card .card-bottom .position-img-2 {
+    left: 80px;
+}
+
+.right-card .card-bottom .position-span-2 {
+    left: 85px;
+}
+
+.right-card .card-bottom .link {
+    margin-right: 24px; 
+}
+
+.right-card .card-bottom a {
+    font-size: 16px;
+}
+
+.pos-2 {
+    margin-top: 32px;
+}
+
+.pos-2.left-card .skills {
+    margin-top: 20px;
+}
+
+.pos-2.left-card .card-bottom {
+    margin-top: 36px;
+}
+
+.pos-2.left-card .card-bottom .position-img-2 {
+    left: 59px;
+}
+
+.hr {
+    float: right;
+    width: 624px;
+    height: 3px;
+    margin-right: 83px;
+    margin-top: 33px;
+    background: url('/images/img_point.png');
+    
+}
+
+
+.right-card .info-card .style-1 {
+    letter-spacing: -1px;
+}
+
+
+.right-card.lower .card-bottom
+{
+    margin-top: 9px;
+}

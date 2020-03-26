@@ -139,32 +139,32 @@
 }
 
 .social-networks .twitter {
-    background: url('/images/image_twitter.png') no-repeat;
+    background: url('/images/img_twitter.png') no-repeat;
     background-position: center;
 }
 
 .social-networks .dribble {
-    background: url('/images/image_dribble.png') no-repeat;
+    background: url('/images/img_dribble.png') no-repeat;
     background-position: 41% 46%;
 }
 
 .social-networks .behance {
-    background: url('/images/image_behance.png') no-repeat;
+    background: url('/images/img_behance.png') no-repeat;
     background-position: 41% 46%;
 }
 
 .social-networks .instagram {
-    background: url('/images/image_instagram.png') no-repeat;
+    background: url('/images/img_instagram.png') no-repeat;
     background-position: 41% 46%;
 }
 
 .social-networks .social-1 {
-    background: url('/images/image_social-1.png') no-repeat;
+    background: url('/images/img_social-1.png') no-repeat;
     background-position: 36% 46%;
 }
 
 .social-networks .in {
-    background: url('/images/image_in.png') no-repeat;
+    background: url('/images/img_in.png') no-repeat;
     background-position: 22% 50%;
 }
 
@@ -186,8 +186,6 @@
     letter-spacing: 2px;
 }
 
-hr {
-    margin-top: 30px;
-    width: 270px;
-}
+
+
 

@@ -1,4 +1,4 @@
-body, p {
+body, p, ul {
     margin: 0;
     padding: 0;
 }
@@ -37,3 +37,5 @@ body, p {
     font-family: "signika negative";
     src: url("fonts/Signika_Negative/SignikaNegative-Regular.ttf")
 }
+
+
