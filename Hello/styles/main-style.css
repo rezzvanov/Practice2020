@@ -52,7 +52,7 @@
 {
     float: left;
     font-family: 'lato';
-    color: #9EA7B4;
+    color: #33495F;
     /* margin-top: 10px; */
 }
 
@@ -177,13 +177,55 @@
     
 }
 
+.right-card.right-card.lower {
+    margin-top: 34px;
+}
+
+.right-card.right-card.lower {
+    margin-top: 34px;
+}
 
 .right-card .info-card .style-1 {
     letter-spacing: -1px;
 }
 
-
 .right-card.lower .card-bottom
 {
     margin-top: 9px;
+    margin-bottom: 19px;
+}
+
+.card-bottom .raiting {
+    float: left;
+    position: relative;
+}
+
+.raiting .star-1 {
+    position: absolute;
+    left: 307px;
+    top: 10px;
+}
+
+.raiting .star-2 {
+    position: absolute;
+    left: 326px;
+    top: 10px;
+}
+
+.raiting .star-3 {
+    position: absolute;
+    left: 346px;
+    top: 10px;
+}
+
+.raiting .star-4 {
+    position: absolute;
+    left: 366px;
+    top: 10px;
+}
+
+.raiting .star-5 {
+    position: absolute;
+    left: 387px;
+    top: 10px;
 }
