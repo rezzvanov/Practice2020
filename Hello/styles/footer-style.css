@@ -1,0 +1,33 @@
+.footer {
+    float: left;
+}
+
+.footer span {
+    float: left;
+    margin-top:100px;
+}
+
+.footer .text {
+    font-style: italic;
+    font-family: 'lato';
+    color: #34495E;
+    letter-spacing: 0.8px;
+    text-align: center;
+    vertical-align: top;
+    margin-top: 58px;
+    margin-bottom: 60px;
+}
+
+.footer .left,
+.footer .right
+ {
+    font-size: 130px;
+    padding: 0 15px;
+    color: #CED4DD;
+    height: 84px;
+    margin-top: 20px;
+ }
+ 
+ .footer .left {
+     margin-left: 430px;
+ }

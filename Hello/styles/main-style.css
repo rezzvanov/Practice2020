@@ -2,11 +2,8 @@
     float: left;
     width: 609px;
     border: 1px solid #F5F7F8;
-    /* border-radius: 5px; */
     background-color: #FFFFFF;
     margin: 36px 0 0 80px;
-    /* padding-top: 28px;
-    padding-left: 24px; */
 }
 
 .info-card .title {
@@ -53,7 +50,7 @@
     float: left;
     font-family: 'lato';
     color: #33495F;
-    /* margin-top: 10px; */
+    color: #9EA7B4;
 }
 
 .location .position-img-1 { 
@@ -98,7 +95,7 @@
     font-size: 17px;
     text-align: center;
     font-display: 0.3px;
-    margin-bottom: 20px;
+    margin-bottom: 21px;
 }
 
 
@@ -118,6 +115,7 @@
 
 .right-card .link a {
     background-color: #10CDC1;
+    margin-bottom: 20px;
 }
 
 .right-card .title .explanation {
@@ -177,11 +175,7 @@
     
 }
 
-.right-card.right-card.lower {
-    margin-top: 34px;
-}
-
-.right-card.right-card.lower {
+.right-card.lower {
     margin-top: 34px;
 }
 
@@ -198,6 +192,15 @@
 .card-bottom .raiting {
     float: left;
     position: relative;
+}
+
+.right-card.pos-3 .date {
+    margin-left: -19px;
+}
+
+.right-card.pos-3 .card-bottom {
+    margin-top: 4px;
+    margin-bottom: 25px;
 }
 
 .raiting .star-1 {
@@ -228,4 +231,374 @@
     position: absolute;
     left: 387px;
     top: 10px;
+}
+
+.left-card .card-bottom.pos-4 {
+    margin-top: 27px;
+}
+
+.hobby {
+    width: 606px;
+    height: 384px;
+    margin: 34px 81px 0 0;
+    padding: 15px 0 0 18px;
+    background-color: #FFF;
+    border: 1px solid #F9FAFB;
+    float: right;
+}
+
+.hobby .block {
+    float: left;
+    margin-right: 26px;
+    width: 77px;
+    height: 77px;
+    border-radius: 50px;
+}
+
+.hobby .green{
+    background-color: #10CDC1;
+}
+
+.hobby .blue {
+    background-color: #16C4EC;
+}
+
+.hobby .melomane {
+    background-color: #10CDC1;
+}
+
+.hobby .red {
+    background-color: #FA5351;
+}
+
+.hobby .img-pos {
+    position: relative;
+    left: 20px;
+    top: 21px;
+}
+
+.hobby .block.voyag {
+    margin-right: 0px;
+}
+
+.block.epicur .img-pos {
+    left: 25px;
+    top: 21px;
+}
+
+.left-card.lower .link a {
+    background-color:  #B0BBCA;
+}
+
+.left-card.lower .link.pos {
+    margin-top: -5px;
+}
+
+.hobby .title {
+    float: left;
+    font-family: 'lato'; 
+    font-size: 13px;
+    margin-top: 10px;
+    margin-right: 32px;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+}
+
+
+.hobby .title.pos-5 {
+    margin-right: 5px;
+}
+
+.hobby .title.pos-6 {
+    margin-left: 5px;
+    margin-right: 0;
+}
+
+.hobby .title.pos-7 {
+    float: right;
+    margin-right: 15px;
+}
+
+.hobby .left-column {
+    float: left;
+    width: 270px;
+    position: relative; 
+}
+
+.hobby .right-column {
+    float: right;
+    width: 270px;
+    position: relative;
+    margin-right: 14px; 
+}
+
+.style-prog p {
+    font-size: 16px;
+    font-family: 'lato';
+}
+
+.left-column progress,
+.right-column progress{
+    width: 100%;
+    height: 14px;
+    -webkit-appearance: none;
+}
+
+.left-column progress::-webkit-progress-bar,
+.right-column progress::-webkit-progress-bar {
+    background-color: #DBE1E8;
+    border-radius: 6px;
+    box-shadow: 0 0 1px 0px #F8F9FA;
+}
+
+.left-column progress::-webkit-progress-value,
+.right-column progress::-webkit-progress-value {  
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px;
+    background-color: #10CDC1;
+}
+
+.right-column progress::-webkit-progress-value {
+    background-color: #16C4EC;
+}
+
+.left-column progress::before,
+.right-column progress::before {
+    content: '';
+    background-color: #34495E;
+    position: absolute;
+    bottom: 22px;
+    color: #fff;
+    font-size: 10px;
+    padding: 3px 10px;
+    border-radius: 7px;
+    font-family: 'Signika';
+}
+
+.left-column progress::after,
+.right-column progress::after {
+    width: 0;
+    height: 0;
+    border-style: solid;
+    position: absolute;
+    border-width: 3px 3px 0 3px;
+    border-color: #34495E transparent transparent transparent;
+    content: '';
+    bottom: 19px;
+}
+
+.left-column div p,
+.right-column div p {
+    position: absolute;
+    bottom: 20px;
+}
+
+.photoshop {
+    position: absolute;
+    width: 270px;
+    bottom: -66px;
+}
+
+.photoshop progress::before {
+    content: '80%';
+    left: 196px;
+}
+
+.photoshop progress::after {
+    left: 215px;
+}
+
+
+.Illustrator progress::before {
+    position: absolute;
+    content: '55%';
+    left: 125px;
+}
+
+.Illustrator progress::after {
+    position: absolute;
+    left: 141px;
+}
+
+.Illustrator {
+    position: absolute;
+    width: 270px;
+    bottom: -120px;
+}
+
+
+.wordpress progress::before {
+    position: absolute;
+    content: '95%';
+    left: 232px;
+}
+
+.wordpress progress::after {
+    position: absolute;
+    left: 250px;
+}
+
+.wordpress {
+    position: absolute;
+    width: 270px;
+    bottom: -176px;
+}
+
+.prestashop progress::before {
+    position: absolute;
+    content: '85%';
+    left: 207px;
+}
+
+.prestashop progress::after {
+    position: absolute;
+    left: 225px;
+}
+
+.prestashop {
+    position: absolute;
+    width: 270px;
+    bottom: -230px;
+}
+
+.naturel {
+    position: absolute;
+    width: 270px;
+    bottom: -66px;
+}
+
+.naturel progress::before{
+    content: '60%';
+    left: 168px;
+}
+
+.naturel progress::after {
+    left: 186px;
+}
+
+.sociaux progress::before{
+    position: absolute;
+    content: '75%';
+    left: 185px;
+}
+
+.sociaux progress::after{
+    position: absolute;
+    left: 202px;
+}
+
+.sociaux {
+    position: absolute;
+    width: 270px;
+    bottom: -120px;
+}
+
+.ui progress::before{
+    position: absolute;
+    content: '55%';
+    left: 132px;
+}
+
+.ui progress::after{
+    position: absolute;
+    left: 150px;
+}
+
+.ui {
+    position: absolute;
+    width: 270px;
+    bottom: -176px;
+}
+
+.user progress::before{
+    position: absolute;
+    content: '60%';
+    left: 170px;
+}
+
+.user progress::after{
+    position: absolute;
+    left: 186px;
+}
+
+.user {
+    position: absolute;
+    width: 270px;
+    bottom: -230px;
+}
+
+.timeline {
+    width: 6px;
+    height: 1145px;
+    position: absolute;
+    background-color: #DBE1E8;
+    left: 753px;
+    top: 413px;
+}
+
+.year {
+    width: 72px;
+    height: 28px;
+    padding-top: 7px;
+    position: absolute;
+    background-color: #DBE1E8;
+    border-radius: 5px;
+    color: #FFF;
+    top: 1553px;
+    left: 720px;
+    font-family: "lato";
+    text-align: center;
+    font-size: 21px;
+}
+
+.ball {
+    width: 20px;
+    height: 20px;
+    border-radius: 50px;
+    position: absolute;
+    left: 746px;
+}
+
+.white-ball {
+    background-color: #FFF;
+}
+
+.grey-ball {
+    background-color: #DBE1E8;
+}
+
+.ball-1 {
+    top: 575px;
+}
+
+.ball-2 {
+    top: 938px;
+}
+
+.ball-3 {
+    top: 1217px;
+}
+
+.ball-4 {
+    top: 1414px;
+}
+
+.ball-5 {
+    top: 677px;
+}
+
+.ball-6 {
+    top: 880px;
+}
+
+.ball-7 {
+    top: 1080px;
+}
+
+.ball-8 {
+    top: 1299px;
+}
+
+.ball-9 {
+    top: 1457px;
 }
