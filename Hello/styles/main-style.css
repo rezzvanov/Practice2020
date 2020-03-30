@@ -253,6 +253,7 @@
     width: 77px;
     height: 77px;
     border-radius: 50px;
+    margin-bottom: 40px; 
 }
 
 .hobby .green{
@@ -295,13 +296,11 @@
 }
 
 .hobby .title {
-    float: left;
     font-family: 'lato'; 
     font-size: 13px;
-    margin-top: 10px;
-    margin-right: 32px;
+    margin-top: 54px;
+    text-align: center;
     text-transform: uppercase;
-    margin-bottom: 15px;
 }
 
 
@@ -310,13 +309,8 @@
 }
 
 .hobby .title.pos-6 {
-    margin-left: 5px;
+    margin-left: -3px;
     margin-right: 0;
-}
-
-.hobby .title.pos-7 {
-    float: right;
-    margin-right: 15px;
 }
 
 .hobby .left-column {
