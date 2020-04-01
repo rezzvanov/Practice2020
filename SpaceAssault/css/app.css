@@ -33,6 +33,14 @@ canvas {
     font-size: 2em;
 }
 
+#mannaScore {
+    position: absolute;
+    color: white;
+    font-size: 2em;
+    left: 850px;
+    top: 720px;
+}
+
 .key {
     color: #aaffdd;
 }
