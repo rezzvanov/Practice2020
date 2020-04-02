@@ -78,6 +78,9 @@ var mannaScoreEL = document.getElementById('mannaScore');
 
 var PADDINGWIDTH = 55;
 var PADDINGHEIGHT = 53;
+var PADDINGSIDE = 40;
+var PADDINGUPPER = 5;
+var PADDINGBOTTOM = 10;
 
 // Speed in pixels per second
 var playerSpeed = 200;
@@ -225,6 +228,13 @@ function boxCollides(pos, size, pos2, size2) {
                     pos2[0] + size2[0], pos2[1] + size2[1]);
 }
 
+function predictCollides(pos, size, pos2, size2) {
+    return collides(pos[0], pos[1]-PADDINGUPPER,
+                    pos[0] + size[0]+PADDINGSIDE, pos[1] + size[1]+PADDINGBOTTOM,
+                    pos2[0], pos2[1],
+                    pos2[0] + size2[0], pos2[1] + size2[1]);
+}
+
 function checkCollisions() {
     checkPlayerBounds();
     
@@ -290,15 +300,16 @@ function checkCollisions() {
         }
     }
 
-    for(var i=0; i<megaliths.length; i++) {
-        var pos = megaliths[i].pos;
-        var size = megaliths[i].sprite.size;
+    
+    for(var j=0; j<enemies.length; j++) {
+        var pos2 = enemies[j].pos;
+        var size2 = enemies[j].sprite.size;
 
-        for(var j=0; j<enemies.length; j++) {
-            var pos2 = enemies[j].pos;
-            var size2 = enemies[j].sprite.size;
-
-            if(boxCollides(pos, size, pos2, size2)) {
+        for(var i=0; i<megaliths.length; i++) {
+            var pos = megaliths[i].pos;
+            var size = megaliths[i].sprite.size;
+        
+            if(predictCollides(pos, size, pos2, size2)) {
                 centerMegalith = pos[1] + size[1] / 2;
                 if(Math.abs(centerMegalith - pos2[1]) > Math.abs(centerMegalith - pos2[1] - size2[1])) {
                     pos2[1] = pos2[1] - 1;
