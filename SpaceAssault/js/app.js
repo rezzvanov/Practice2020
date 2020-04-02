@@ -210,7 +210,7 @@ function updateEntities(dt) {
     }
 
     if(mannas.length < 3) {
-        spawnMannaOnGame();
+        spawnManna(randomInt(3,5));
     }
 }
 
@@ -421,25 +421,27 @@ function spawnMegaliths() {
     }
 }
 
-function spawnManna() {
-    var numbersOfManna = randomInt(3, 8);
-    for(var i=0; i < numbersOfManna; i++) {
+function spawnManna(numberOfMannas) {
+    function pushManna() {
         mannas.push({
             pos: [randomInt(0, canvas.width - PADDINGWIDTH), randomInt(0, canvas.height - PADDINGHEIGHT)],
             sprite: new Sprite('img/sprites.png', [0, 164], [56, 44], 5, [0, 1])
         })
+    }
+    label:
+    for(var i=0; i < numberOfMannas; i++) {
+        pushManna();
+        for(var j = 0; j < megaliths.length; j++)
+        {
+            if(boxCollides(mannas[i].pos, mannas[i].sprite.size, megaliths[j].pos, megaliths[j].sprite.size)) {
+                mannas.splice(i,1);
+                i--;
+                continue label;
+            }
+        }
     } 
 }
 
-function spawnMannaOnGame() {
-    var numbersOfManna = randomInt(3, 6);
-    for(var i=0; i < numbersOfManna; i++) {
-        mannas.push({
-            pos: [randomInt(0, canvas.width - PADDINGWIDTH), randomInt(0, canvas.height - PADDINGHEIGHT)],
-            sprite: new Sprite('img/sprites.png', [0, 164], [56, 44], 5, [0, 1])
-        })
-    } 
-}
 
 function randomInt(min, max) {
     var rand = min + Math.random() * (max + 1 - min);
@@ -460,7 +462,7 @@ function reset() {
     megaliths = [];
     mannas = [];
 
-    spawnManna();
     player.pos = [50, canvas.height / 2];
     spawnMegaliths();
+    spawnManna(randomInt(3,8));
 };
