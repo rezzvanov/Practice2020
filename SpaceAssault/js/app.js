@@ -394,6 +394,12 @@ function gameOver() {
 }
 
 function spawnMegaliths() {
+    function pushMegaliths() {
+        megaliths.push({
+            pos: [randomInt(leftBorder, canvas.width - PADDINGWIDTH), randomInt(0, canvas.height - PADDINGHEIGHT)],
+            sprite: new Sprite('img/sprites.png', megalithTypes[typeOfMegaliths].pos, megalithTypes[typeOfMegaliths].size)
+        });
+    }
     var megalithTypes = [
         {pos: [3,213], 
         size: [55,53]},
@@ -406,10 +412,12 @@ function spawnMegaliths() {
     var numbersOfMegaliths = randomInt(3, 5);
     for(var i=0; i < numbersOfMegaliths; i++) {
         var typeOfMegaliths = randomInt(0, 1);
-        megaliths.push({
-            pos: [randomInt(leftBorder, canvas.width - PADDINGWIDTH), randomInt(0, canvas.height - PADDINGHEIGHT)],
-            sprite: new Sprite('img/sprites.png', megalithTypes[typeOfMegaliths].pos, megalithTypes[typeOfMegaliths].size)
-        });
+        pushMegaliths();
+        if(boxCollides(megaliths[i].pos, megaliths[i].sprite.size, player.pos, player.sprite.size)) {
+            megaliths.splice(i,1);
+            i--;
+            pushMegaliths();
+        }
     }
 }
 
@@ -452,7 +460,7 @@ function reset() {
     megaliths = [];
     mannas = [];
 
-    spawnMegaliths();
     spawnManna();
     player.pos = [50, canvas.height / 2];
+    spawnMegaliths();
 };
