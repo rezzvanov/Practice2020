@@ -209,7 +209,7 @@ function updateEntities(dt) {
         vanishManna[i].sprite.update(dt);
     }
 
-    if(mannas.length < 3) {
+    if(mannas.length <= 3) {
         spawnManna(randomInt(3,5));
     }
 }
@@ -425,13 +425,14 @@ function spawnManna(numberOfMannas) {
     function pushManna() {
         mannas.push(newManna);
     }
-    
+
     label:
     for(var i=0; i < numberOfMannas; i++) {
         newManna = {
             pos: [randomInt(0, canvas.width - PADDINGWIDTH), randomInt(0, canvas.height - PADDINGHEIGHT)],
             sprite: new Sprite('img/sprites.png', [0, 164], [56, 44], 5, [0, 1])
-        }
+        };
+        
         for(var j = 0; j < megaliths.length; j++)
         {
             if(boxCollides(newManna.pos, newManna.sprite.size, megaliths[j].pos, megaliths[j].sprite.size)) {
@@ -439,8 +440,15 @@ function spawnManna(numberOfMannas) {
                 continue label;
             }
         }
+
+        if(boxCollides(newManna.pos, newManna.sprite.size, player.pos, player.sprite.size)) {
+            i--;
+            continue;
+        }
+
         pushManna(newManna);
-    } 
+    }
+
 }
 
 
