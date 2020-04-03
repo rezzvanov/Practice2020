@@ -111,7 +111,7 @@ function update(dt) {
     checkCollisions();
 
     scoreEl.innerHTML = score;
-    mannaScoreEL.innerHTML = 'Mana Score: ' + mannaScore;
+    mannaScoreEL.innerHTML = 'Manna Score: ' + mannaScore;
 };
 
 function handleInput(dt) {
@@ -423,22 +423,23 @@ function spawnMegaliths() {
 
 function spawnManna(numberOfMannas) {
     function pushManna() {
-        mannas.push({
-            pos: [randomInt(0, canvas.width - PADDINGWIDTH), randomInt(0, canvas.height - PADDINGHEIGHT)],
-            sprite: new Sprite('img/sprites.png', [0, 164], [56, 44], 5, [0, 1])
-        })
+        mannas.push(newManna);
     }
+    
     label:
     for(var i=0; i < numberOfMannas; i++) {
-        pushManna();
+        newManna = {
+            pos: [randomInt(0, canvas.width - PADDINGWIDTH), randomInt(0, canvas.height - PADDINGHEIGHT)],
+            sprite: new Sprite('img/sprites.png', [0, 164], [56, 44], 5, [0, 1])
+        }
         for(var j = 0; j < megaliths.length; j++)
         {
-            if(boxCollides(mannas[i].pos, mannas[i].sprite.size, megaliths[j].pos, megaliths[j].sprite.size)) {
-                mannas.splice(i,1);
+            if(boxCollides(newManna.pos, newManna.sprite.size, megaliths[j].pos, megaliths[j].sprite.size)) {
                 i--;
                 continue label;
             }
         }
+        pushManna(newManna);
     } 
 }
 
