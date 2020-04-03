@@ -178,6 +178,19 @@ function updateEntities(dt) {
     for(var i=0; i<enemies.length; i++) {
         enemies[i].pos[0] -= enemySpeed * dt;
         enemies[i].sprite.update(dt);
+    
+        for(var j=0; j<megaliths.length; j++) {
+            var pos = megaliths[j].pos;
+            var size = megaliths[j].sprite.size;
+            
+            if(predictCollides(pos, size, enemies[i].pos, enemies[i].sprite.size)) {
+                centerMegalith = pos[1] + size[1] / 2;
+                if(Math.abs(centerMegalith - enemies[i].pos[1]) > Math.abs(centerMegalith - enemies[i].pos[1] - enemies[i].sprite.size[1])) {
+                    enemies[i].pos[1] -= enemySpeed * dt;
+                }
+                else enemies[i].pos[1] += enemySpeed * dt;
+            }
+        }
 
         // Remove if offscreen
         if(enemies[i].pos[0] + enemies[i].sprite.size[0] < 0) {
@@ -297,26 +310,6 @@ function checkCollisions() {
         if(boxCollides(pos, size, player.pos, player.sprite.size)) {
             player.pos[0] = playerLastPosX;
             player.pos[1] = playerLastPosY;
-        }
-    }
-
-    
-    for(var j=0; j<enemies.length; j++) {
-        var pos2 = enemies[j].pos;
-        var size2 = enemies[j].sprite.size;
-
-        for(var i=0; i<megaliths.length; i++) {
-            var pos = megaliths[i].pos;
-            var size = megaliths[i].sprite.size;
-        
-            if(predictCollides(pos, size, pos2, size2)) {
-                centerMegalith = pos[1] + size[1] / 2;
-                if(Math.abs(centerMegalith - pos2[1]) > Math.abs(centerMegalith - pos2[1] - size2[1])) {
-                    pos2[1] -= 1;
-                }
-                else pos2[1] += 1;
-                break;
-            }
         }
     }
 
