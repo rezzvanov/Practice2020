@@ -91,9 +91,6 @@ var enemySpeed = 100;
 function update(dt) {
     gameTime += dt;
 
-    playerLastPosX = player.pos[0];
-    playerLastPosY = player.pos[1];
-
     handleInput(dt);
     updateEntities(dt);
 
@@ -115,6 +112,9 @@ function update(dt) {
 };
 
 function handleInput(dt) {
+    playerLastPosX = player.pos[0];
+    playerLastPosY = player.pos[1];
+
     if(input.isDown('DOWN') || input.isDown('s')) {
         player.pos[1] += playerSpeed * dt;
     }
