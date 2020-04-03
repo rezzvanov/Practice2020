@@ -312,9 +312,9 @@ function checkCollisions() {
             if(predictCollides(pos, size, pos2, size2)) {
                 centerMegalith = pos[1] + size[1] / 2;
                 if(Math.abs(centerMegalith - pos2[1]) > Math.abs(centerMegalith - pos2[1] - size2[1])) {
-                    pos2[1] = pos2[1] - 1;
+                    pos2[1] -= 1;
                 }
-                else pos2[1] = pos2[1] + 1;
+                else pos2[1] += 1;
                 break;
             }
         }
