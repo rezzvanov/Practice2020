@@ -289,6 +289,26 @@ function checkCollisions() {
         if(boxCollides(pos, size, player.pos, player.sprite.size)) {
             gameOver();
         }
+
+        for(var j=0; j<megaliths.length; j++)
+        {
+            if(boxCollides(pos, size, megaliths[j].pos, megaliths[j].sprite.size))
+            {
+                explosions.push({
+                    pos: pos,
+                    sprite: new Sprite('img/sprites.png',
+                                       [0, 117],
+                                       [39, 39],
+                                       16,
+                                       [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+                                       null,
+                                       true)
+                });
+                enemies.splice(i, 1);
+                break;
+                
+            }
+        }
     }
 
     for(var i=0; i<megaliths.length; i++) {
