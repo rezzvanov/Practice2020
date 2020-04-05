@@ -222,7 +222,7 @@ function updateEntities(dt) {
         vanishManna[i].sprite.update(dt);
     }
 
-    if(mannas.length <= 3) {
+    if(mannas.length == 3) {
         spawnManna(randomInt(3,5));
     }
 }
