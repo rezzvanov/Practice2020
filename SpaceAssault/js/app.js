@@ -131,6 +131,16 @@ function handleInput(dt) {
         player.pos[0] += playerSpeed * dt;
     }
 
+    for(var i=0; i<megaliths.length; i++) {
+        var pos = megaliths[i].pos;
+        var size = megaliths[i].sprite.size;
+
+        if(boxCollides(pos, size, player.pos, player.sprite.size)) {
+            player.pos[0] = playerLastPosX;
+            player.pos[1] = playerLastPosY;
+        }
+    }
+
     if(input.isDown('SPACE') &&
        !isGameOver &&
        Date.now() - lastFire > 100) {
@@ -325,11 +335,6 @@ function checkCollisions() {
 
                 break;
             }
-        }
-
-        if(boxCollides(pos, size, player.pos, player.sprite.size)) {
-            player.pos[0] = playerLastPosX;
-            player.pos[1] = playerLastPosY;
         }
     }
 
