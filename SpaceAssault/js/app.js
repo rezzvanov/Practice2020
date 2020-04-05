@@ -229,10 +229,6 @@ function updateEntities(dt) {
     for(var i=0; i < vanishManna.length; i++) {
         vanishManna[i].sprite.update(dt);
     }
-
-    if(mannas.length == 3) {
-        spawnManna(randomInt(3,5));
-    }
 }
 
 // Collisions
@@ -344,6 +340,16 @@ function checkCollisions() {
                 sprite: new Sprite('img/sprites.png', [0, 164], [56, 44], 6, [1, 2, 3], null, true)         
             });
             mannas.splice(i, 1);
+            
+            if(mannas.length < 8 && mannas.length >= 3) {
+                var spawnSwitch = randomInt(0, 1);
+                if(spawnSwitch == 1) {
+                    spawnManna(randomInt(0, 8 - mannas.length));
+                }
+            }
+            if(mannas.length < 3) { 
+                spawnManna(randomInt(1, 6))
+            } 
             break;
         }
     }
