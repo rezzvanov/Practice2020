@@ -110,32 +110,41 @@ function update(dt) {
 };
 
 function handleInput(dt) {
-    playerLastPosX = player.pos[0];
-    playerLastPosY = player.pos[1];
+
+    function predictCollisions(offsetPosX, offsetPosY) {
+        for(var i=0; i<megaliths.length; i++) {
+            var pos = megaliths[i].pos;
+            var size = megaliths[i].sprite.size;
+    
+            if(boxCollides(pos, size, [player.pos[0] + offsetPosX, player.pos[1] + offsetPosY], player.sprite.size)) {
+
+                return true;
+            }
+        }
+        return false;
+    }
 
     if(input.isDown('DOWN') || input.isDown('s')) {
+        if(!(predictCollisions(0, playerSpeed * dt))) {
         player.pos[1] += playerSpeed * dt;
+        }
     }
 
     if(input.isDown('UP') || input.isDown('w')) {
+        if(!(predictCollisions(0, -playerSpeed * dt))) {
         player.pos[1] -= playerSpeed * dt;
+        }
     }
 
     if(input.isDown('LEFT') || input.isDown('a')) {
+        if(!(predictCollisions(-playerSpeed * dt, 0))) {
         player.pos[0] -= playerSpeed * dt;
+        }
     }
 
     if(input.isDown('RIGHT') || input.isDown('d')) {
+        if(!(predictCollisions(playerSpeed * dt, 0))) {
         player.pos[0] += playerSpeed * dt;
-    }
-
-    for(var i=0; i<megaliths.length; i++) {
-        var pos = megaliths[i].pos;
-        var size = megaliths[i].sprite.size;
-
-        if(boxCollides(pos, size, player.pos, player.sprite.size)) {
-            player.pos[0] = playerLastPosX;
-            player.pos[1] = playerLastPosY;
         }
     }
 
