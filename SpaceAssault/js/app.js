@@ -70,6 +70,7 @@ var isGameOver;
 var terrainPattern;
 var playerLastPosX;
 var playerLastPosY;
+var collisionLimit = 60;
 
 var score = 0;
 var mannaScore = 0;
@@ -78,7 +79,7 @@ var mannaScoreEL = document.getElementById('mannaScore');
 
 var PADDINGWIDTH = 55;
 var PADDINGHEIGHT = 53;
-var PADDINGSIDE = 30;
+var PADDINGSIDE = 5;
 
 // Speed in pixels per second
 var playerSpeed = 200;
@@ -99,7 +100,8 @@ function update(dt) {
             pos: [canvas.width,
                   Math.random() * (canvas.height - 39)],
             sprite: new Sprite('img/sprites.png', [0, 78], [80, 39],
-                               6, [0, 1, 2, 3, 2, 1])
+                               6, [0, 1, 2, 3, 2, 1]),
+            collisionCount: 0
         });
     }
 
@@ -193,6 +195,7 @@ function updateEntities(dt) {
 
     // Update all the enemies
     for(var i=0; i<enemies.length; i++) {
+
         enemies[i].pos[0] -= enemySpeed * dt;
         enemies[i].sprite.update(dt);
     
@@ -200,12 +203,31 @@ function updateEntities(dt) {
             var pos = megaliths[j].pos;
             var size = megaliths[j].sprite.size;
             
-            if(boxCollides(pos, size, enemies[i].pos, enemies[i].sprite.size, PADDINGSIDE)) {
+            if(boxCollides(pos, [size[0] + PADDINGSIDE, size[1]], enemies[i].pos, enemies[i].sprite.size)) {
+                enemies[i].collisionCount++;
                 centerMegalith = pos[1] + size[1] / 2;
                 if(Math.abs(centerMegalith - enemies[i].pos[1]) > Math.abs(centerMegalith - enemies[i].pos[1] - enemies[i].sprite.size[1])) {
-                    enemies[i].pos[1] -= enemySpeed * dt * 1.3;
+                    enemies[i].pos[1] -= enemySpeed * dt;
                 }
-                else enemies[i].pos[1] += enemySpeed * dt * 1.3;
+                else {
+                    enemies[i].pos[1] += enemySpeed * dt;
+                }
+                enemies[i].pos[0] += enemySpeed * dt;
+            }
+
+            if(enemies[i].collisionCount > collisionLimit)
+            {
+                explosions.push({
+                                pos: enemies[i].pos,
+                                sprite: new Sprite('img/sprites.png',
+                                                   [0, 117],
+                                                   [39, 39],
+                                                   16,
+                                                   [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+                                                   null,
+                                                   true)
+                });
+                enemies.splice(i, 1);
             }
         }
 
@@ -247,10 +269,9 @@ function collides(x, y, r, b, x2, y2, r2, b2) {
              b <= y2 || y > b2);
 }
 
-function boxCollides(pos, size, pos2, size2, PADDINGSIDE) {
-    padding = PADDINGSIDE || 0;
+function boxCollides(pos, size, pos2, size2) {
     return collides(pos[0], pos[1],
-                    pos[0] + size[0] + padding, pos[1] + size[1],
+                    pos[0] + size[0], pos[1] + size[1],
                     pos2[0], pos2[1],
                     pos2[0] + size2[0], pos2[1] + size2[1]);
 }
@@ -297,26 +318,6 @@ function checkCollisions() {
         if(boxCollides(pos, size, player.pos, player.sprite.size)) {
             gameOver();
         }
-
-        for(var j=0; j<megaliths.length; j++)
-        {
-            if(boxCollides(megaliths[j].pos, megaliths[j].sprite.size, pos, size))
-            {
-                explosions.push({
-                    pos: pos,
-                    sprite: new Sprite('img/sprites.png',
-                                       [0, 117],
-                                       [39, 39],
-                                       16,
-                                       [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
-                                       null,
-                                       true)
-                });
-                enemies.splice(i, 1);
-                break;
-                
-            }
-        }
     }
 
     for(var i=0; i<megaliths.length; i++) {
@@ -329,7 +330,7 @@ function checkCollisions() {
 
             if(boxCollides(pos, size, pos2, size2)) {
                 bullets.splice(j, 1);
-                i--;
+                j--;
 
                 break;
             }
@@ -349,7 +350,7 @@ function checkCollisions() {
                 sprite: new Sprite('img/sprites.png', [0, 164], [56, 44], 6, [1, 2, 3], null, true)         
             });
             mannas.splice(i, 1);
-            
+
             if(mannas.length < 8 && mannas.length >= 3) {
                 var spawnSwitch = randomInt(0, 1);
                 if(spawnSwitch == 1) {
