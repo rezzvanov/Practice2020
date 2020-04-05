@@ -76,11 +76,9 @@ var mannaScore = 0;
 var scoreEl = document.getElementById('score');
 var mannaScoreEL = document.getElementById('mannaScore');
 
+var PADDINGSIDE = 30;
 var PADDINGWIDTH = 55;
 var PADDINGHEIGHT = 53;
-var PADDINGSIDE = 40;
-var PADDINGUPPER = 5;
-var PADDINGBOTTOM = 10;
 
 // Speed in pixels per second
 var playerSpeed = 200;
@@ -129,6 +127,16 @@ function handleInput(dt) {
 
     if(input.isDown('RIGHT') || input.isDown('d')) {
         player.pos[0] += playerSpeed * dt;
+    }
+
+    for(var i=0; i<megaliths.length; i++) {
+        var pos = megaliths[i].pos;
+        var size = megaliths[i].sprite.size;
+
+        if(boxCollides(pos, size, player.pos, player.sprite.size)) {
+            player.pos[0] = playerLastPosX;
+            player.pos[1] = playerLastPosY;
+        }
     }
 
     if(input.isDown('SPACE') &&
@@ -183,12 +191,12 @@ function updateEntities(dt) {
             var pos = megaliths[j].pos;
             var size = megaliths[j].sprite.size;
             
-            if(predictCollides(pos, size, enemies[i].pos, enemies[i].sprite.size)) {
+            if(boxCollides(pos, size, enemies[i].pos, enemies[i].sprite.size, PADDINGSIDE)) {
                 centerMegalith = pos[1] + size[1] / 2;
                 if(Math.abs(centerMegalith - enemies[i].pos[1]) > Math.abs(centerMegalith - enemies[i].pos[1] - enemies[i].sprite.size[1])) {
-                    enemies[i].pos[1] -= enemySpeed * dt;
+                    enemies[i].pos[1] -= enemySpeed * dt * 1.3;
                 }
-                else enemies[i].pos[1] += enemySpeed * dt;
+                else enemies[i].pos[1] += enemySpeed * dt * 1.3;
             }
         }
 
@@ -234,16 +242,10 @@ function collides(x, y, r, b, x2, y2, r2, b2) {
              b <= y2 || y > b2);
 }
 
-function boxCollides(pos, size, pos2, size2) {
+function boxCollides(pos, size, pos2, size2, PADDINGSIDE) {
+    var padding = PADDINGSIDE || 0;
     return collides(pos[0], pos[1],
-                    pos[0] + size[0], pos[1] + size[1],
-                    pos2[0], pos2[1],
-                    pos2[0] + size2[0], pos2[1] + size2[1]);
-}
-
-function predictCollides(pos, size, pos2, size2) {
-    return collides(pos[0], pos[1]-PADDINGUPPER,
-                    pos[0] + size[0]+PADDINGSIDE, pos[1] + size[1]+PADDINGBOTTOM,
+                    pos[0] + size[0] + padding, pos[1] + size[1],
                     pos2[0], pos2[1],
                     pos2[0] + size2[0], pos2[1] + size2[1]);
 }
@@ -292,7 +294,7 @@ function checkCollisions() {
 
         for(var j=0; j<megaliths.length; j++)
         {
-            if(boxCollides(pos, size, megaliths[j].pos, megaliths[j].sprite.size))
+            if(boxCollides(megaliths[j].pos, megaliths[j].sprite.size, pos, size))
             {
                 explosions.push({
                     pos: pos,
@@ -305,8 +307,7 @@ function checkCollisions() {
                                        true)
                 });
                 enemies.splice(i, 1);
-                break;
-                
+                break;               
             }
         }
     }
@@ -322,14 +323,8 @@ function checkCollisions() {
             if(boxCollides(pos, size, pos2, size2)) {
                 bullets.splice(j, 1);
                 i--;
-
                 break;
             }
-        }
-
-        if(boxCollides(pos, size, player.pos, player.sprite.size)) {
-            player.pos[0] = playerLastPosX;
-            player.pos[1] = playerLastPosY;
         }
     }
 
@@ -415,10 +410,10 @@ function spawnMegaliths() {
     }
     var megalithTypes = [
         {pos: [3,213], 
-        size: [55,53]},
+        size: [55,56]},
 
-        {pos: [5,274],
-        size: [48,42]}
+        {pos: [5,272],
+        size: [48,47]}
     ];
 
     var leftBorder = player.sprite.size[0];
