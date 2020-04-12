@@ -17,7 +17,7 @@ namespace Tanks.Model
 
     abstract class MovableObject : GameObject
     {
-        private Direction Direction { get; }
+        public Direction Direction { get; set; }
 
         protected int speed;
 
@@ -46,5 +46,6 @@ namespace Tanks.Model
                     break;
             }
         }
+
     }
 }

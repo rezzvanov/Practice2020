@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Drawing;
 
 namespace Tanks.Model
 {
+    using System.Drawing;
+
     abstract class GameObject
     {
         protected Point currenPos;
@@ -17,6 +18,7 @@ namespace Tanks.Model
         {
             currenPos = initialPos;
             hitBox = new Rectangle(initialPos, squareSize);
+            
         }  
     }
 }
