@@ -48,10 +48,12 @@
   <ItemGroup>
     <Compile Include="Controller\PackmanController.cs" />
     <Compile Include="Model\Apple.cs" />
+    <Compile Include="Model\GameField.cs" />
     <Compile Include="Model\GameObject.cs" />
     <Compile Include="Model\Kolobok.cs" />
     <Compile Include="Model\MovableObject.cs" />
     <Compile Include="Model\Wall.cs" />
+    <Compile Include="View\GameFieldView.cs" />
     <Compile Include="View\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -69,6 +71,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="View\MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
