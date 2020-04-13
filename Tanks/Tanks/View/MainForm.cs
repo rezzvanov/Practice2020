@@ -13,16 +13,28 @@ using Tanks.View;
 
 namespace Tanks
 {
+    delegate void FormInvoker();
+
     public partial class MainForm : Form
     {
         private GameField GameField { get; }
-        private GameField GameFieldView { get; }
+        private GameFieldView GameFieldView { get; }
 
         public MainForm(GameField gameField, Size sizeField, GameFieldView gameFieldView)
         {
-            pictureBox1.Size = sizeField;
+            InitializeComponent();
 
-            InitializeComponent();            
+            GameField = gameField;
+            GameFieldView = gameFieldView;
+
+            GameField.timer.Tick += (s, e) => UpdateView();
+        }
+
+        public void UpdateView()
+        {
+            GameField.UpdateAllObject();
+            Render();
+
         }
 
         private void Render()
@@ -30,6 +42,25 @@ namespace Tanks
             Bitmap bitmap = new Bitmap(GameField.SizeField.Width, GameField.SizeField.Height);
 
             Graphics graphics = Graphics.FromImage(bitmap);
+
+            KolobokView.Kolobok.Render(GameField.Kolobok, graphics);
+
+            foreach (Wall wall in GameField.walls)
+            {
+                WallView.Wall.Render(wall, graphics);
+            }
+
+            foreach (Apple apple in GameField.apples)
+            {
+                AppleView.Apple.Render(apple, graphics);
+            }
+
+            FormInvoker fi = delegate
+            {
+                pictureBox1.Image = bitmap;
+                pictureBox1.Invalidate();
+            };
+            Invoke(fi);
         }
     }
 }
