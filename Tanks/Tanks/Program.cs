@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Tanks.Model;
 using Tanks.View;
+using Tanks.Controller;
 using System.Drawing;
 
 namespace Tanks
@@ -20,10 +21,12 @@ namespace Tanks
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            GameField gameField = new GameField(new Size(500, 500), 60);
+            GameField gameField = new GameField(new Size(300, 300), 60, 5, 5);
             GameFieldView gameFieldView = new GameFieldView(gameField, gameField.SizeField);
 
-            Application.Run(new MainForm());
+            PackmanController packmanController = new PackmanController(gameField, gameFieldView);
+
+            Application.Run(gameFieldView.MainForm);
         }
     }
 }
