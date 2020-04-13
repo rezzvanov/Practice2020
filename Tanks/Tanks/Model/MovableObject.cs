@@ -7,7 +7,7 @@ using System.Drawing;
 
 namespace Tanks.Model
 {
-    enum Direction
+    public enum Direction
     {
         Left,
         Right,
@@ -15,11 +15,11 @@ namespace Tanks.Model
         Down
     }
 
-    abstract class MovableObject : GameObject
+    public abstract class MovableObject : GameObject
     {
         public Direction Direction { get; set; }
 
-        protected int speed;
+        private const int offset = 1;
 
         protected MovableObject(Point position, Size squareSize, Direction direction) : base(position, squareSize)
         {
@@ -31,21 +31,26 @@ namespace Tanks.Model
             switch (Direction)
             {
                 case Direction.Down:
-                    currenPos.Y -= speed * dt;
+                    currenPos.Y -= offset * dt;
                     break;
                 case Direction.Up:
-                    currenPos.Y += speed * dt;
+                    currenPos.Y += offset * dt;
                     break;
                 case Direction.Left:
-                    currenPos.X -= speed * dt;
+                    currenPos.X -= offset * dt;
                     break;
                 case Direction.Right:
-                    currenPos.X += speed * dt;
+                    currenPos.X += offset * dt;
                     break;
                 default:
                     break;
             }
+            hitBox.Offset(new Point(currenPos.X, currenPos.Y));
         }
 
+        public void continuousMove(int dt)
+        {
+            Move(dt);
+        }
     }
 }

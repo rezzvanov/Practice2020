@@ -20,6 +20,8 @@ namespace Tanks.Controller
             this.gameFieldView = gameFieldView;
 
             gameField.timer.Start();
+
+            gameFieldView.MainForm.KeyDown += handleInput;
         }
 
         private void handleInput(object sender, KeyEventArgs e)

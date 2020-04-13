@@ -2,7 +2,7 @@
 
 namespace Tanks.Model
 {
-    class Wall : GameObject
+    public class Wall : GameObject
     {
         public Wall(Point initialPos, Size squareSize)
             : base(initialPos, squareSize)

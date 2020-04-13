@@ -8,10 +8,9 @@ namespace Tanks.Model
 {
     using System.Drawing;
 
-    abstract class GameObject
+    public abstract class GameObject
     {
-        protected Point currenPos;
-        protected Image icon;
+        public Point currenPos;
         public Rectangle hitBox;
 
         protected GameObject(Point initialPos, Size squareSize)
