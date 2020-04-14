@@ -16,6 +16,5 @@ namespace Tanks.View
         {
             MainForm = new MainForm(gameField, sizeField, this);
         }
-
     }
 }

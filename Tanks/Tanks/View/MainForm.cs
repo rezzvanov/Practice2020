@@ -34,7 +34,6 @@ namespace Tanks
         {
             GameField.UpdateAllObject();
             Render();
-
         }
 
         private void Render()
@@ -53,6 +52,21 @@ namespace Tanks
             foreach (Apple apple in GameField.apples)
             {
                 AppleView.Apple.Render(apple, graphics);
+            }
+
+            foreach (Tank tank in GameField.tanks)
+            {
+                TankView.Tank.Render(tank, graphics);
+            }
+
+            foreach (Bullet bullet in GameField.bullets)
+            {
+                BulletView.Bullet.Render(bullet, graphics);
+            }
+
+            foreach (Bullet bullet in GameField.enemyBullets)
+            {
+                BulletView.Bullet.Render(bullet, graphics);
             }
 
             FormInvoker fi = delegate

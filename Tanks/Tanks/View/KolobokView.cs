@@ -16,7 +16,7 @@ namespace Tanks.View
             get
             {
                 kolobok = new KolobokView();
-                kolobok.icon = Image.FromFile(@"Resources\Tank.png");
+                kolobok.icon = Image.FromFile(@"Resources\Kolobok.png");
                 return kolobok;
             }
         }
