@@ -29,7 +29,7 @@ namespace Tanks.Controller
             switch (e.KeyCode)
             {
                 case Keys.Space:
-
+                    gameField.Shot(gameField.Kolobok);
                     break;
                 case Keys.Left:
                 case Keys.A:
