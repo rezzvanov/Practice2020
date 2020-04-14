@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="Controller\PackmanController.cs" />
     <Compile Include="Model\Apple.cs" />
+    <Compile Include="Model\Bullet.cs" />
     <Compile Include="Model\GameField.cs" />
     <Compile Include="Model\GameObject.cs" />
     <Compile Include="Model\Kolobok.cs" />
@@ -55,6 +56,7 @@
     <Compile Include="Model\Tank.cs" />
     <Compile Include="Model\Wall.cs" />
     <Compile Include="View\AppleView.cs" />
+    <Compile Include="View\BulletView.cs" />
     <Compile Include="View\GameFieldView.cs" />
     <Compile Include="View\GameObjectView.cs" />
     <Compile Include="View\KolobokView.cs" />
@@ -66,6 +68,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="View\TankView.cs" />
     <Compile Include="View\WallView.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -105,6 +108,16 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Wall.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Kolobok.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Bullet.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
