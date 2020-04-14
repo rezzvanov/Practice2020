@@ -16,8 +16,7 @@ namespace Tanks.Model
         protected GameObject(Point initialPos, Size squareSize)
         {
             currenPos = initialPos;
-            hitBox = new Rectangle(initialPos, squareSize);
-            
-        }  
+            hitBox = new Rectangle(initialPos, squareSize);        
+        }
     }
 }

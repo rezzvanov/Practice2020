@@ -12,7 +12,6 @@ namespace Tanks.Model
         public Tank(Point initialPos, Size squareSize, Direction direction) 
             : base(initialPos, squareSize, direction)
         {
-
         }
 
         private Random rand = new Random();

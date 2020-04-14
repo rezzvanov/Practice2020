@@ -7,7 +7,6 @@ namespace Tanks.Model
         public Kolobok(Point initialPos, Size squareSize, Direction direction) 
             : base(initialPos, squareSize, direction)
         {
-
         }
     }
 }

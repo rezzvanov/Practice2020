@@ -21,7 +21,7 @@ namespace Tanks
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            GameField gameField = new GameField(new Size(300, 300), 60, 5, 5);
+            GameField gameField = new GameField(new Size(700, 700), 500, 5, 5);
             GameFieldView gameFieldView = new GameFieldView(gameField, gameField.SizeField);
 
             PackmanController packmanController = new PackmanController(gameField, gameFieldView);
