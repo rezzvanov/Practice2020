@@ -1,14 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Tanks.Model;
-using Tanks.Controller;
 using Tanks.View;
 
 namespace Tanks
@@ -20,12 +13,37 @@ namespace Tanks
         private GameField GameField { get; }
         private GameFieldView GameFieldView { get; }
 
+        public Label Result
+        {
+            get
+            {
+                return resultL;
+            }
+        }
+
+        public Label Score
+        {
+            get
+            {
+                return scoreL;
+            }
+        }
+
+        public Button Button
+        {
+            get
+            {
+                return StartGameBut;
+            }
+        }
+
         public MainForm(GameField gameField, Size sizeField, GameFieldView gameFieldView)
         {
             InitializeComponent();
 
             GameField = gameField;
             GameFieldView = gameFieldView;
+            pictureBox1.Size = gameField.SizeField;
 
             GameField.timer.Tick += (s, e) => UpdateView();
         }
@@ -75,6 +93,15 @@ namespace Tanks
                 pictureBox1.Invalidate();
             };
             Invoke(fi);
+        }
+
+        private void StartGameBut_Click(object sender, EventArgs e)
+        {
+            GameField.Reset();
+            GameField.timer.Start();
+            StartGameBut.Enabled = false;
+            resultL.Visible = false;
+            Focus();
         }
     }
 }

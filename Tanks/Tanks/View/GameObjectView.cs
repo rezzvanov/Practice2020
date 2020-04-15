@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Tanks.Model;
+﻿using Tanks.Model;
 using System.Drawing;
 
 namespace Tanks.View
@@ -41,6 +36,7 @@ namespace Tanks.View
                             break;
                     }
                     break;
+
                 case Direction.Right:
                     switch (direction)
                     {
@@ -57,6 +53,7 @@ namespace Tanks.View
                             break;
                     }
                     break;
+
                 case Direction.Left:
                     switch (direction)
                     {
@@ -73,6 +70,7 @@ namespace Tanks.View
                             break;
                     }
                     break;
+
                 case Direction.Down:
                     switch (direction)
                     {
@@ -89,6 +87,7 @@ namespace Tanks.View
                             break;
                     }
                     break;
+
                 default:
                     break;
             }

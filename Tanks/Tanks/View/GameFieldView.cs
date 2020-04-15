@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Tanks.Model;
+﻿using Tanks.Model;
 using System.Drawing;
 
 namespace Tanks.View
@@ -12,9 +7,13 @@ namespace Tanks.View
     {
         public MainForm MainForm { get; }
 
+        public InfoForm InfoForm { get; }
+
         public GameFieldView(GameField gameField, Size sizeField)
         {
             MainForm = new MainForm(gameField, sizeField, this);
-        }
+            InfoForm = new InfoForm(gameField, this);
+            InfoForm.Show();
+        }       
     }
 }
