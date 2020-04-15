@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Tanks.Model
+﻿namespace Tanks.Model
 {
     using System.Drawing;
 
@@ -17,6 +11,30 @@ namespace Tanks.Model
         {
             currenPos = initialPos;
             hitBox = new Rectangle(initialPos, squareSize);        
+        }
+
+        public virtual string Name
+        {
+            get
+            {
+                return "GameObject";
+            }
+        }
+
+        public int X
+        {
+            get
+            {
+                return hitBox.X;
+            }
+        }
+
+        public int Y
+        {
+            get
+            {
+                return hitBox.Y;
+            }
         }
     }
 }

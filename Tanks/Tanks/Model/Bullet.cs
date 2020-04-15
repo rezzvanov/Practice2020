@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Drawing;
+﻿using System.Drawing;
 
 namespace Tanks.Model
 {
@@ -12,7 +7,15 @@ namespace Tanks.Model
         public Bullet(MovableObject shooter, Size squareSize) 
             : base(new Point(shooter.hitBox.X + shooter.hitBox.Width / 2, shooter.hitBox.Y + shooter.hitBox.Width / 2), squareSize, shooter.Direction)
         {
-            offset = 2;
+            offset = 3;
+        }
+
+        public override string Name
+        {
+            get
+            {
+                return "Bullet";
+            }
         }
     }
 }

@@ -8,5 +8,13 @@ namespace Tanks.Model
             : base(initialPos, squareSize)
         {
         }
+
+        public override string Name
+        {
+            get
+            {
+                return "Wall";
+            }
+        }
     }
 }

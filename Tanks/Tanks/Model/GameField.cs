@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.IO;
 using System.Windows.Forms;
 
 namespace Tanks.Model
@@ -12,27 +11,30 @@ namespace Tanks.Model
         private Size SizeCell = new Size(50, 50);
         private Size SizeBullet = new Size(9, 12);
         private const int scale = 50;
-        public bool isFire;
-        public int GameSpeed { get; }
-        internal Kolobok Kolobok { get; set; }
-
         public Timer timer = new Timer();
+        public int GameSpeed { get; }
+        public Kolobok Kolobok { get; set; }
         public int dt { get; }
 
-        public int Score { get; private set; }
+        public event EventHandler ScoreUpdate;
+        public event EventHandler Win;
+        public event EventHandler End;
+
+
+        public int Score { get; private set; } = 0;
 
         private Random rand = new Random();
 
         private readonly char[,] map = { { 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w' },
-                                         { 'w', 'g', 't', 'g', 'g', 'g', 't', 'g', 'g', 'g', 'g', 't', 'g', 'w' },
+                                         { 'w', 'g', 't', 'g', 'g', 'g', 'g', 'g', 'g', 'g', 'g', 't', 'g', 'w' },
                                          { 'w', 'g', 'g', 'g', 'g', 'g', 'g', 'g', 'g', 'g', 'g', 'g', 'g', 'w' },
-                                         { 'w', 'g', 't', 'g', 'w', 'g', 'g', 'g', 'g', 'w', 'g', 't', 'g', 'w' },
+                                         { 'w', 'g', 't', 'g', 'g', 'g', 't', 'g', 'g', 'g', 'g', 'g', 'g', 'w' },
+                                         { 'w', 'g', 'g', 'g', 'w', 'g', 'g', 'g', 'g', 'w', 'g', 't', 'g', 'w' },
                                          { 'w', 'g', 'g', 'g', 'w', 'g', 'g', 'g', 'g', 'w', 'g', 'g', 'g', 'w' },
                                          { 'w', 'g', 'g', 'g', 'w', 'g', 'g', 'g', 'g', 'w', 'g', 'g', 'g', 'w' },
                                          { 'w', 'g', 'g', 'g', 'w', 'g', 'g', 'g', 'g', 'w', 'g', 'g', 'g', 'w' },
                                          { 'w', 'g', 'g', 'g', 'w', 'g', 'g', 'g', 'g', 'w', 'g', 'g', 'g', 'w' },
                                          { 'w', 'g', 'g', 'g', 'w', 'g', 'g', 'g', 'g', 'w', 'g', 'g', 'g', 'w' },
-                                         { 'w', 'g', 'g', 'g', 'g', 'g', 'g', 'g', 'g', 'g', 'g', 'g', 'g', 'w' },
                                          { 'w', 'g', 'g', 'g', 'g', 'g', 'k', 'g', 'g', 'g', 'g', 'g', 'g', 'w' },
                                          { 'w', 'g', 'g', 'g', 'g', 'g', 'g', 'g', 'g', 'g', 'g', 'g', 'g', 'w' },
                                          { 'w', 'g', 'g', 'g', 'g', 'g', 'g', 'g', 'g', 'g', 'g', 'g', 'g', 'w' },
@@ -44,18 +46,19 @@ namespace Tanks.Model
         public List<Apple> apples = new List<Apple>();
         public List<Bullet> enemyBullets = new List<Bullet>();
         public List<Bullet> bullets = new List<Bullet>();
+        public List<GameObject> gameObjects = new List<GameObject>();
 
         public GameField(Size sizeField, int pace, int numbersOfTanks, int numbersOfApples)
         {
             SizeField = sizeField;
-            SpawnField(numbersOfTanks, numbersOfApples);
+            SpawnFieldObjectsOnfield(numbersOfTanks, numbersOfApples);
             GameSpeed = 1000 / pace;
             timer.Interval = GameSpeed;
             dt = timer.Interval;
 
         }
 
-        private void SpawnField(int numbersOfTanks, int numbersOfApples)
+        private void SpawnFieldObjectsOnfield(int numbersOfTanks, int numbersOfApples)
         {
             for (int i = 0; i < map.GetLength(0); i++)
             {
@@ -103,14 +106,14 @@ namespace Tanks.Model
             }
         }
 
-        public void Shot(MovableObject movObject)
+        public void Shoot(MovableObject movObject)
         {
             bullets.Add(new Bullet(movObject, SizeBullet));
         }
 
         public void ShotEnemy(MovableObject movObject)
         {
-            enemyBullets.Add(new Bullet(movObject,SizeBullet));
+            enemyBullets.Add(new Bullet(movObject, SizeBullet));
         }
 
 
@@ -138,14 +141,22 @@ namespace Tanks.Model
                 if (apples[i].hitBox.IntersectsWith(Kolobok.hitBox))
                 {
                     Score++;
+                    Updatescore();
                     apples.RemoveAt(i);
+                }
+            }
+
+            for (int i = 0; i < enemyBullets.Count; i++)
+            {
+                if (enemyBullets[i].hitBox.IntersectsWith(Kolobok.hitBox))
+                {
+                    GameOver();
                 }
             }
         }
 
         private void UpdateTanks()
         {
-
             for (int i = 0; i < tanks.Count; i++)
             {
                 int chanceOfTurning = rand.Next(0, 100);
@@ -175,11 +186,21 @@ namespace Tanks.Model
                     }
                 }
 
-                int chanceOfShot = rand.Next(0, 70);
-                if (chanceOfShot == 69)
+                int chanceOfShot = rand.Next(0, 51);
+                if (chanceOfShot == 50)
                 {
                     ShotEnemy(tanks[i]);
                 }
+
+                if (tanks[i].hitBox.IntersectsWith(Kolobok.hitBox))
+                {
+                    GameOver();
+                }
+            }
+
+            if(tanks.Count == 0)
+            {
+                GameWon();
             }
         }
 
@@ -205,16 +226,6 @@ namespace Tanks.Model
                         break;
                     }
                 }
-
-                //for (int j = 0; j < tanks.Count; j++)
-                //{
-                //    if (bullets[i].hitBox.IntersectsWith(tanks[j].hitBox))
-                //    {
-                //        bullets.RemoveAt(i);
-                //        tanks.RemoveAt(j);
-                //        break;
-                //    }
-                //}
             }
 
             for (int i = 0; i < enemyBullets.Count; i++)
@@ -230,6 +241,34 @@ namespace Tanks.Model
                     }
                 }
             }
+
+            for (int i = 0; i < bullets.Count; i++)
+            {
+                for (int j = 0; j < tanks.Count; j++)
+                {
+                    if (bullets[i].hitBox.IntersectsWith(tanks[j].hitBox))
+                    {
+                        tanks.RemoveAt(j);
+                        bullets.RemoveAt(i);
+                        break;
+                    }
+                }
+            }
+        }
+
+        private void Updatescore()
+        {
+            ScoreUpdate?.Invoke(this, EventArgs.Empty);
+        }
+
+        private void GameOver()
+        {
+            End?.Invoke(this, EventArgs.Empty);
+        }
+
+        private void GameWon()
+        {
+            Win?.Invoke(this, EventArgs.Empty);
         }
 
         public void UpdateAllObject()
@@ -238,8 +277,30 @@ namespace Tanks.Model
             UpdateTanks();
             RefreshApples();
             UpdateBullets();
+            UpdateObjectData();
         }
 
+        public void Reset()
+        {
+            walls = new List<Wall>();
+            tanks = new List<Tank>();
+            apples = new List<Apple>();
+            enemyBullets = new List<Bullet>();
+            bullets = new List<Bullet>();
+            Score = 0;
+            Updatescore();
+            SpawnFieldObjectsOnfield(5, 5);
+        }
+
+        private void UpdateObjectData()
+        {
+            gameObjects = new List<GameObject>();
+            gameObjects.Add(Kolobok);
+            gameObjects.AddRange(tanks);
+            gameObjects.AddRange(apples);
+            gameObjects.AddRange(enemyBullets);
+            gameObjects.AddRange(bullets);
+        }
     }
 }
 

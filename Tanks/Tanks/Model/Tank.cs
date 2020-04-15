@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Drawing;
 
 namespace Tanks.Model
@@ -39,6 +35,13 @@ namespace Tanks.Model
                     break;
                 default:
                     break;
+            }
+        }
+        public override string Name
+        {
+            get
+            {
+                return "Tank";
             }
         }
     }
