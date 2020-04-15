@@ -91,7 +91,7 @@
             this.MaximumSize = new System.Drawing.Size(853, 741);
             this.MinimumSize = new System.Drawing.Size(853, 741);
             this.Name = "MainForm";
-            this.Text = "Form1";
+            this.Text = "Tanks";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
