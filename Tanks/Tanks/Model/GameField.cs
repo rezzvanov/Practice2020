@@ -51,14 +51,14 @@ namespace Tanks.Model
         public GameField(Size sizeField, int pace, int numbersOfTanks, int numbersOfApples)
         {
             SizeField = sizeField;
-            SpawnFieldObjectsOnfield(numbersOfTanks, numbersOfApples);
+            SpawnObjectsOnАield(numbersOfTanks, numbersOfApples);
             GameSpeed = 1000 / pace;
             timer.Interval = GameSpeed;
             dt = timer.Interval;
 
         }
 
-        private void SpawnFieldObjectsOnfield(int numbersOfTanks, int numbersOfApples)
+        private void SpawnObjectsOnАield(int numbersOfTanks, int numbersOfApples)
         {
             for (int i = 0; i < map.GetLength(0); i++)
             {
@@ -289,7 +289,7 @@ namespace Tanks.Model
             bullets = new List<Bullet>();
             Score = 0;
             Updatescore();
-            SpawnFieldObjectsOnfield(5, 5);
+            SpawnObjectsOnАield(5, 5);
         }
 
         private void UpdateObjectData()
