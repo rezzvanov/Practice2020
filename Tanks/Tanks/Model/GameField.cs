@@ -26,18 +26,18 @@ namespace Tanks.Model
         private Random rand = new Random();
 
         private readonly char[,] map = { { 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w' },
-                                         { 'w', 'g', 't', 'g', 'g', 'g', 'g', 'g', 'g', 'g', 'g', 't', 'g', 'w' },
+                                         { 'w', 'g', 'g', 't', 'g', 'g', 'g', 'g', 'g', 'g', 'g', 't', 'g', 'w' },
                                          { 'w', 'g', 'g', 'g', 'g', 'g', 'g', 'g', 'g', 'g', 'g', 'g', 'g', 'w' },
                                          { 'w', 'g', 't', 'g', 'g', 'g', 't', 'g', 'g', 'g', 'g', 'g', 'g', 'w' },
-                                         { 'w', 'g', 'g', 'g', 'w', 'g', 'g', 'g', 'g', 'w', 'g', 't', 'g', 'w' },
+                                         { 'w', 'g', 'g', 'g', 'f', 'g', 'g', 'g', 'g', 'f', 'g', 't', 'g', 'w' },
+                                         { 'w', 'g', 'g', 'g', 'f', 'g', 'g', 'g', 'g', 'f', 'g', 'g', 'g', 'w' },
                                          { 'w', 'g', 'g', 'g', 'w', 'g', 'g', 'g', 'g', 'w', 'g', 'g', 'g', 'w' },
-                                         { 'w', 'g', 'g', 'g', 'w', 'g', 'g', 'g', 'g', 'w', 'g', 'g', 'g', 'w' },
-                                         { 'w', 'g', 'g', 'g', 'w', 'g', 'g', 'g', 'g', 'w', 'g', 'g', 'g', 'w' },
-                                         { 'w', 'g', 'g', 'g', 'w', 'g', 'g', 'g', 'g', 'w', 'g', 'g', 'g', 'w' },
-                                         { 'w', 'g', 'g', 'g', 'w', 'g', 'g', 'g', 'g', 'w', 'g', 'g', 'g', 'w' },
-                                         { 'w', 'g', 'g', 'g', 'g', 'g', 'k', 'g', 'g', 'g', 'g', 'g', 'g', 'w' },
-                                         { 'w', 'g', 'g', 'g', 'g', 'g', 'g', 'g', 'g', 'g', 'g', 'g', 'g', 'w' },
-                                         { 'w', 'g', 'g', 'g', 'g', 'g', 'g', 'g', 'g', 'g', 'g', 'g', 'g', 'w' },
+                                         { 'w', 'r', 'r', 'r', 'w', 'g', 'g', 'g', 'g', 'w', 'g', 'g', 'g', 'w' },
+                                         { 'w', 'g', 'g', 'g', 'f', 'g', 'g', 'g', 'g', 'f', 'g', 'g', 'g', 'w' },
+                                         { 'w', 'g', 'g', 'g', 'f', 'g', 'g', 'g', 'g', 'f', 'g', 'g', 'g', 'w' },
+                                         { 'w', 'g', 'g', 'g', 'g', 'g', 'g', 'g', 'g', 'g', 'g', 'g', 'r', 'w' },
+                                         { 'w', 'g', 'g', 'g', 'g', 'g', 'k', 'g', 'g', 'g', 'g', 'g', 'r', 'w' },
+                                         { 'w', 'g', 'g', 'g', 'g', 'g', 'g', 'g', 'g', 'g', 'g', 'g', 'r', 'w' },
                                          { 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w' }};
 
 
@@ -46,6 +46,8 @@ namespace Tanks.Model
         public List<Apple> apples = new List<Apple>();
         public List<Bullet> enemyBullets = new List<Bullet>();
         public List<Bullet> bullets = new List<Bullet>();
+        public List<River> rivers = new List<River>();
+        public List<FragileBlock> fragileBlocks = new List<FragileBlock>();
         public List<GameObject> gameObjects = new List<GameObject>();
 
         public GameField(Size sizeField, int pace, int numbersOfTanks, int numbersOfApples)
@@ -70,6 +72,12 @@ namespace Tanks.Model
                             continue;
                         case 'w':
                             walls.Add(new Wall(new Point(i * scale, j * scale), SizeCell));
+                            break;
+                        case 'r':
+                            rivers.Add(new River(new Point(i * scale, j * scale), SizeCell));
+                            break;
+                        case 'f':
+                            fragileBlocks.Add(new FragileBlock(new Point(i * scale, j * scale), SizeCell));
                             break;
                         case 'k':
                             Kolobok = new Kolobok(new Point(i * scale, j * scale), SizeCell, Direction.Up);
@@ -121,19 +129,19 @@ namespace Tanks.Model
         {
             Kolobok.continuousMove(dt);
 
-            for (int i = 0; i < walls.Count; i++)
+            if (CheckKolobokСollisions(Kolobok, walls))
             {
-                if (walls[i].hitBox.IntersectsWith(Kolobok.hitBox))
-                {
-                    if (Kolobok.Direction == Direction.Up || Kolobok.Direction == Direction.Left)
-                    {
-                        Kolobok.hitBox.Offset(new Point(Math.Abs(Kolobok.lastPosX - Kolobok.hitBox.X), Math.Abs(Kolobok.lastPosY - Kolobok.hitBox.Y)));
-                    }
-                    if (Kolobok.Direction == Direction.Down || Kolobok.Direction == Direction.Right)
-                    {
-                        Kolobok.hitBox.Offset(new Point(Kolobok.lastPosX - Kolobok.hitBox.X, Kolobok.lastPosY - Kolobok.hitBox.Y));
-                    }
-                }
+                PreventCollision();
+            }
+
+            if (CheckKolobokСollisions(Kolobok, rivers))
+            {
+                PreventCollision();
+            }
+
+            if (CheckKolobokСollisions(Kolobok, fragileBlocks))
+            {
+                PreventCollision();
             }
 
             for (int i = 0; i < apples.Count; i++)
@@ -146,13 +154,11 @@ namespace Tanks.Model
                 }
             }
 
-            for (int i = 0; i < enemyBullets.Count; i++)
+            if (CheckKolobokСollisions(Kolobok, enemyBullets))
             {
-                if (enemyBullets[i].hitBox.IntersectsWith(Kolobok.hitBox))
-                {
-                    GameOver();
-                }
+                GameOver();
             }
+
         }
 
         private void UpdateTanks()
@@ -161,19 +167,10 @@ namespace Tanks.Model
             {
                 int chanceOfTurning = rand.Next(0, 100);
 
-                for (int j = 0; j < walls.Count; j++)
+                if (chanceOfTurning == 99)
                 {
-                    if (chanceOfTurning == 99)
-                    {
-                        tanks[i].SelectTurn();
-                    }
-                    if (walls[j].hitBox.IntersectsWith(tanks[i].hitBox))
-                    {
-                        tanks[i].Turn();
-                        tanks[i].continuousMove(dt);
-                    }
+                    tanks[i].SelectTurn();
                 }
-                tanks[i].continuousMove(dt);
 
                 for (int z = 0; z < tanks.Count; z++)
                 {
@@ -185,8 +182,9 @@ namespace Tanks.Model
                         break;
                     }
                 }
-
+      
                 int chanceOfShot = rand.Next(0, 51);
+
                 if (chanceOfShot == 50)
                 {
                     ShotEnemy(tanks[i]);
@@ -196,9 +194,30 @@ namespace Tanks.Model
                 {
                     GameOver();
                 }
+
+                tanks[i].continuousMove(dt);
             }
 
-            if(tanks.Count == 0)
+            if (CheckСollisions(tanks, walls, out GameObject tank1, out GameObject wall1))
+            {
+                ((Tank)tank1).Turn();
+                ((Tank)tank1).continuousMove(dt);
+            }
+
+            if (CheckСollisions(tanks, rivers, out GameObject tank2, out GameObject rivers1))
+            {
+                ((Tank)tank2).Turn();
+                ((Tank)tank2).continuousMove(dt);
+            }
+
+            if (CheckСollisions(tanks, fragileBlocks, out GameObject tank3, out GameObject block))
+            {
+                ((Tank)tank3).Turn();
+                ((Tank)tank3).continuousMove(dt);
+            }
+
+
+            if (tanks.Count == 0)
             {
                 GameWon();
             }
@@ -217,42 +236,88 @@ namespace Tanks.Model
             for (int i = 0; i < bullets.Count; i++)
             {
                 bullets[i].continuousMove(dt);
-
-                for (int j = 0; j < walls.Count; j++)
-                {
-                    if (bullets[i].hitBox.IntersectsWith(walls[j].hitBox))
-                    {
-                        bullets.RemoveAt(i);
-                        break;
-                    }
-                }
             }
 
             for (int i = 0; i < enemyBullets.Count; i++)
             {
                 enemyBullets[i].continuousMove(dt);
+            }
 
-                for (int j = 0; j < walls.Count; j++)
+            if (CheckСollisions(bullets, walls, out GameObject bullet1, out GameObject wall1))
+            {
+                bullets.Remove((Bullet)bullet1);
+            }
+
+            if (CheckСollisions(bullets, fragileBlocks, out GameObject bullet2, out GameObject block1))
+            {
+                bullets.Remove((Bullet)bullet2);
+                fragileBlocks.Remove((FragileBlock)block1);
+            }
+
+            if (CheckСollisions(enemyBullets, walls, out GameObject enemyBullet1, out GameObject wall2))
+            {
+                enemyBullets.Remove((Bullet)enemyBullet1);
+            }
+
+            if (CheckСollisions(enemyBullets, fragileBlocks, out GameObject enemyBullet2, out GameObject block2))
+            {
+                enemyBullets.Remove((Bullet)enemyBullet2);
+                fragileBlocks.Remove((FragileBlock)block2);
+            }
+
+            if (CheckСollisions(bullets, tanks, out GameObject bullet3, out GameObject tank))
+            {
+                bullets.Remove((Bullet)bullet3);
+                tanks.Remove((Tank)tank);
+            }
+
+            if (CheckСollisions(bullets, enemyBullets, out GameObject bullet4, out GameObject enemyBullet))
+            {
+                bullets.Remove((Bullet)bullet4);
+                enemyBullets.Remove((Bullet)enemyBullet);
+            }
+        }
+
+        private bool CheckKolobokСollisions(Kolobok kolobok, IEnumerable<GameObject> gameObjects)
+        {
+            foreach (GameObject i in gameObjects)
+            {
+                if (i.hitBox.IntersectsWith(Kolobok.hitBox))
                 {
-                    if (enemyBullets[i].hitBox.IntersectsWith(walls[j].hitBox))
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private bool CheckСollisions(IEnumerable<GameObject> gameObjects1, IEnumerable<GameObject> gameObjects2, out GameObject gameObjectOut1, out GameObject gameObjectOut2)
+        {
+            foreach (GameObject i in gameObjects1)
+            {
+                foreach (GameObject j in gameObjects2)
+                {
+                    if (i.hitBox.IntersectsWith(j.hitBox))
                     {
-                        enemyBullets.RemoveAt(i);
-                        break;
+                        gameObjectOut1 = i;
+                        gameObjectOut2 = j;
+                        return true;
                     }
                 }
             }
+            gameObjectOut1 = null;
+            gameObjectOut2 = null;
+            return false;
+        }
 
-            for (int i = 0; i < bullets.Count; i++)
+        private void PreventCollision()
+        {
+            if (Kolobok.Direction == Direction.Up || Kolobok.Direction == Direction.Left)
             {
-                for (int j = 0; j < tanks.Count; j++)
-                {
-                    if (bullets[i].hitBox.IntersectsWith(tanks[j].hitBox))
-                    {
-                        tanks.RemoveAt(j);
-                        bullets.RemoveAt(i);
-                        break;
-                    }
-                }
+                Kolobok.hitBox.Offset(new Point(Math.Abs(Kolobok.lastPosX - Kolobok.hitBox.X), Math.Abs(Kolobok.lastPosY - Kolobok.hitBox.Y)));
+            }
+            if (Kolobok.Direction == Direction.Down || Kolobok.Direction == Direction.Right)
+            {
+                Kolobok.hitBox.Offset(new Point(Kolobok.lastPosX - Kolobok.hitBox.X, Kolobok.lastPosY - Kolobok.hitBox.Y));
             }
         }
 
@@ -287,6 +352,8 @@ namespace Tanks.Model
             apples = new List<Apple>();
             enemyBullets = new List<Bullet>();
             bullets = new List<Bullet>();
+            rivers = new List<River>();
+            fragileBlocks = new List<FragileBlock>();
             Score = 0;
             Updatescore();
             SpawnObjectsOnАield(5, 5);
