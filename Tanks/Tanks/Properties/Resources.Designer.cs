@@ -83,9 +83,29 @@ namespace Tanks.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap FragileBlock {
+            get {
+                object obj = ResourceManager.GetObject("FragileBlock", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Kolobok {
             get {
                 object obj = ResourceManager.GetObject("Kolobok", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap River {
+            get {
+                object obj = ResourceManager.GetObject("River", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

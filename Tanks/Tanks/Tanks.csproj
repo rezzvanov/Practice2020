@@ -49,14 +49,17 @@
     <Compile Include="Controller\PackmanController.cs" />
     <Compile Include="Model\Apple.cs" />
     <Compile Include="Model\Bullet.cs" />
+    <Compile Include="Model\FragileBlock.cs" />
     <Compile Include="Model\GameField.cs" />
     <Compile Include="Model\GameObject.cs" />
     <Compile Include="Model\Kolobok.cs" />
     <Compile Include="Model\MovableObject.cs" />
+    <Compile Include="Model\River.cs" />
     <Compile Include="Model\Tank.cs" />
     <Compile Include="Model\Wall.cs" />
     <Compile Include="View\AppleView.cs" />
     <Compile Include="View\BulletView.cs" />
+    <Compile Include="View\FragileBlockView.cs" />
     <Compile Include="View\GameFieldView.cs" />
     <Compile Include="View\GameObjectView.cs" />
     <Compile Include="View\InfoForm.cs">
@@ -77,6 +80,7 @@
     <Compile Include="View\MyDataGridView.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="View\RiverView.cs" />
     <Compile Include="View\TankView.cs" />
     <Compile Include="View\WallView.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -134,6 +138,16 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Bullet.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\River.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\FragileBlock.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
