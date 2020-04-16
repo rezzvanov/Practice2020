@@ -77,6 +77,16 @@ namespace Tanks
                 TankView.Tank.Render(tank, graphics);
             }
 
+            foreach (River river in GameField.rivers)
+            {
+                RiverView.River.Render(river, graphics);
+            }
+
+            foreach (FragileBlock fragileBlock in GameField.fragileBlocks)
+            {
+                FragileBlockView.FragileBlock.Render(fragileBlock, graphics);
+            }
+
             foreach (Bullet bullet in GameField.bullets)
             {
                 BulletView.Bullet.Render(bullet, graphics);
