@@ -4,10 +4,10 @@ namespace Tanks.Model
 {
     public enum Direction
     {
-        Left,
-        Right,
         Up,
-        Down
+        Right,
+        Down,
+        Left
     }
 
     public abstract class MovableObject : GameObject

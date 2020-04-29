@@ -20,14 +20,46 @@ namespace Tanks.View
         {
             switch (currentDirection)
             {
+                case Direction.Down:
+                    switch (direction)
+                    {
+                        case Direction.Left:
+                            icon.RotateFlip(RotateFlipType.Rotate90FlipNone);
+                            break;
+                        case Direction.Right:
+                            icon.RotateFlip(RotateFlipType.Rotate270FlipNone);
+                            break;
+                        case Direction.Up:
+                            icon.RotateFlip(RotateFlipType.Rotate180FlipNone);
+                            break;
+                        default:
+                            break;
+                    }
+                    break;
                 case Direction.Up:
                     switch (direction)
                     {
                         case Direction.Right:
-                            icon.RotateFlip(RotateFlipType.Rotate180FlipNone);
+                            icon.RotateFlip(RotateFlipType.Rotate90FlipNone);
                             break;
                         case Direction.Left:
+                            icon.RotateFlip(RotateFlipType.Rotate270FlipNone);
+                            break;
+                        case Direction.Down:
+                            icon.RotateFlip(RotateFlipType.Rotate180FlipNone);
+                            break;
+                        default:
+                            break;
+                    }
+                    break;
+                case Direction.Left:
+                    switch (direction)
+                    {
+                        case Direction.Up:
                             icon.RotateFlip(RotateFlipType.Rotate90FlipNone);
+                            break;
+                        case Direction.Right:
+                            icon.RotateFlip(RotateFlipType.Rotate180FlipNone);
                             break;
                         case Direction.Down:
                             icon.RotateFlip(RotateFlipType.Rotate270FlipNone);
@@ -54,46 +86,10 @@ namespace Tanks.View
                     }
                     break;
 
-                case Direction.Left:
-                    switch (direction)
-                    {
-                        case Direction.Left:
-                            icon.RotateFlip(RotateFlipType.Rotate270FlipNone);
-                            break;
-                        case Direction.Right:
-                            icon.RotateFlip(RotateFlipType.Rotate90FlipNone);
-                            break;
-                        case Direction.Down:
-                            icon.RotateFlip(RotateFlipType.Rotate180FlipNone);
-                            break;
-                        default:
-                            break;
-                    }
-                    break;
-
-                case Direction.Down:
-                    switch (direction)
-                    {
-                        case Direction.Left:
-                            icon.RotateFlip(RotateFlipType.Rotate90FlipNone);
-                            break;
-                        case Direction.Right:
-                            icon.RotateFlip(RotateFlipType.Rotate270FlipNone);
-                            break;
-                        case Direction.Up:
-                            icon.RotateFlip(RotateFlipType.Rotate180FlipNone);
-                            break;
-                        default:
-                            break;
-                    }
-                    break;
-
                 default:
                     break;
             }
             currentDirection = direction;
         }
     }
-
-
 }

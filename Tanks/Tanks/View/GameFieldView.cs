@@ -1,5 +1,6 @@
 ﻿using Tanks.Model;
 using System.Drawing;
+using System;
 
 namespace Tanks.View
 {
@@ -14,6 +15,6 @@ namespace Tanks.View
             MainForm = new MainForm(gameField, sizeField, this);
             InfoForm = new InfoForm(gameField, this);
             InfoForm.Show();
-        }       
+        }
     }
 }

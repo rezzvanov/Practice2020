@@ -11,7 +11,7 @@ namespace Tanks.Model
         private Size SizeCell = new Size(50, 50);
         private Size SizeBullet = new Size(9, 12);
         private const int scale = 50;
-        public Timer timer = new Timer();
+        public Timer Timer { get; } = new Timer();
         public int GameSpeed { get; }
         public Kolobok Kolobok { get; set; }
         public int dt { get; }
@@ -21,7 +21,7 @@ namespace Tanks.Model
         public event EventHandler End;
 
 
-        public int Score { get; private set; } = 0;
+        public static int Score { get; private set; } = 0;
 
         private Random rand = new Random();
 
@@ -55,9 +55,8 @@ namespace Tanks.Model
             SizeField = sizeField;
             SpawnObjectsOnАield(numbersOfTanks, numbersOfApples);
             GameSpeed = 1000 / pace;
-            timer.Interval = GameSpeed;
-            dt = timer.Interval;
-
+            Timer.Interval = GameSpeed;
+            dt = Timer.Interval;
         }
 
         private void SpawnObjectsOnАield(int numbersOfTanks, int numbersOfApples)
@@ -176,6 +175,10 @@ namespace Tanks.Model
                 {
                     if (tanks[i].hitBox.IntersectsWith(tanks[z].hitBox))
                     {
+                        if(i == z)
+                        {
+                            break;
+                        }
                         tanks[i].Turn();
                         tanks[z].Turn();
 
@@ -208,6 +211,7 @@ namespace Tanks.Model
             {
                 ((Tank)tank2).Turn();
                 ((Tank)tank2).continuousMove(dt);
+
             }
 
             if (CheckСollisions(tanks, fragileBlocks, out GameObject tank3, out GameObject block))
@@ -343,6 +347,11 @@ namespace Tanks.Model
             RefreshApples();
             UpdateBullets();
             UpdateObjectData();
+        }
+
+        public void StopTimer(object sender, EventArgs e)
+        {
+            Timer.Stop();
         }
 
         public void Reset()

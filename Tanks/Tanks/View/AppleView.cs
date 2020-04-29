@@ -7,12 +7,16 @@ namespace Tanks.View
     {
         private static AppleView apple;
 
+        static AppleView()
+        {
+            apple = new AppleView();
+            apple.icon = Image.FromFile(@"Resources\Apple.png");
+        }
+
         public static AppleView Apple
         {
-            get 
+            get
             {
-                apple = new AppleView();
-                apple.icon = Image.FromFile(@"Resources\Apple.png");
                 return apple;
             }
         }

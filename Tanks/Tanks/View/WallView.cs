@@ -12,10 +12,14 @@ namespace Tanks.View
         {
             get
             {
-                wall = new WallView(); 
-                wall.icon = Image.FromFile(@"Resources\Wall.png");
                 return wall;
             }
+        }
+
+        static WallView()
+        {
+            wall = new WallView();
+            wall.icon = Image.FromFile(@"Resources\Wall.png");
         }
 
         public void Render(Wall wall, Graphics graphics)

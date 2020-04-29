@@ -17,9 +17,12 @@ namespace Tanks.Controller
             this.gameField = gameField;
             this.gameFieldView = gameFieldView;
 
-            gameField.ScoreUpdate += UpdateScore;
-            gameField.End += GameOver;
-            gameField.Win += WonGame;
+            gameField.End += gameField.StopTimer;
+            gameField.End += gameFieldView.MainForm.GameOver;
+            gameField.Win += gameField.StopTimer;
+            gameField.Win += gameFieldView.MainForm.WonGame;
+            gameField.ScoreUpdate += gameFieldView.MainForm.UpdateScore;
+            gameField.Timer.Tick += gameFieldView.InfoForm.UpdateView;
             gameFieldView.MainForm.KeyDown += handleInput;
         }
 
@@ -53,29 +56,6 @@ namespace Tanks.Controller
                 default:
                     break;
             }
-        }
-
-        private void GameOver(object sender, EventArgs e)
-        {
-            gameField.timer.Stop();
-            gameFieldView.MainForm.Result.Text = "GameOver";
-            gameFieldView.MainForm.Result.ForeColor = Color.Red;
-            gameFieldView.MainForm.Result.Visible = true;
-            gameFieldView.MainForm.Button.Enabled = true;
-        }
-
-        private void WonGame(object sender, EventArgs e)
-        {
-            gameField.timer.Stop();
-            gameFieldView.MainForm.Result.Text = "Win";
-            gameFieldView.MainForm.Result.ForeColor = Color.Green;
-            gameFieldView.MainForm.Result.Visible = true;
-            gameFieldView.MainForm.Button.Enabled = true;
-        }
-
-        private void UpdateScore(object sender, EventArgs e)
-        {
-            gameFieldView.MainForm.Score.Text = $"Score: {gameField.Score}";
         }
     }
 }

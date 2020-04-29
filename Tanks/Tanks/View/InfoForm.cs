@@ -14,7 +14,6 @@ namespace Tanks.View
             InitializeComponent();
 
             GameField = gameField;
-            GameField.timer.Tick += UpdateView;
         }
 
         public void UpdateView(object sender, EventArgs e)

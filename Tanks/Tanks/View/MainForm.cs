@@ -45,7 +45,7 @@ namespace Tanks
             GameFieldView = gameFieldView;
             pictureBox1.Size = gameField.SizeField;
 
-            GameField.timer.Tick += (s, e) => UpdateView();
+            GameField.Timer.Tick += (s, e) => UpdateView();
         }
 
         public void UpdateView()
@@ -105,13 +105,35 @@ namespace Tanks
             Invoke(fi);
         }
 
+        public void GameOver(object sender, EventArgs e)
+        {
+            Result.Text = "GameOver";
+            Result.ForeColor = Color.Red;
+            Result.Visible = true;
+            Button.Enabled = true;
+        }
+
+        public void WonGame(object sender, EventArgs e)
+        {
+            Result.Text = "Win";
+            Result.ForeColor = Color.Green;
+            Result.Visible = true;
+            Button.Enabled = true;
+        }
+
+        public void UpdateScore(object sender, EventArgs e)
+        {
+            Score.Text = $"Score: {GameField.Score}";
+        }
+
         private void StartGameBut_Click(object sender, EventArgs e)
         {
             GameField.Reset();
-            GameField.timer.Start();
+            GameField.Timer.Start();
             StartGameBut.Enabled = false;
             resultL.Visible = false;
             Focus();
         }
+
     }
 }

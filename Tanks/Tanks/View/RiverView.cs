@@ -11,10 +11,14 @@ namespace Tanks.View
         {
             get
             {
-                river = new RiverView();
-                river.icon = Image.FromFile(@"Resources\River.png");
                 return river;
             }
+        }
+
+        static RiverView()
+        {
+            river = new RiverView();
+            river.icon = Image.FromFile(@"Resources\River.png");
         }
 
         public void Render(River river, Graphics graphics)

@@ -11,10 +11,14 @@ namespace Tanks.View
         {
             get
             {
-                kolobok = new KolobokView();
-                kolobok.icon = Image.FromFile(@"Resources\Kolobok.png");
                 return kolobok;
             }
+        }
+
+        static KolobokView()
+        {
+            kolobok = new KolobokView();
+            kolobok.icon = Image.FromFile(@"Resources\Kolobok.png");
         }
     }
 }

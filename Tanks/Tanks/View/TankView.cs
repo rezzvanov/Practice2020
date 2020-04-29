@@ -10,10 +10,14 @@ namespace Tanks.View
         {
             get
             {
-                tank = new TankView();
-                tank.icon = Image.FromFile(@"Resources\Tank.png");
                 return tank;
             }
+        }
+
+        static TankView()
+        {
+            tank = new TankView();
+            tank.icon = Image.FromFile(@"Resources\Tank.png");
         }
     }
 }

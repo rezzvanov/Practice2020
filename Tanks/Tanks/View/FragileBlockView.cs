@@ -11,10 +11,14 @@ namespace Tanks.View
         {
             get
             {
-                fragileBlock = new FragileBlockView();
-                fragileBlock.icon = Image.FromFile(@"Resources\FragileBlock.png");
                 return fragileBlock;
             }
+        }
+
+        static FragileBlockView()
+        {
+            fragileBlock = new FragileBlockView();
+            fragileBlock.icon = Image.FromFile(@"Resources\FragileBlock.png");
         }
 
         public void Render(FragileBlock fragileBlock, Graphics graphics)

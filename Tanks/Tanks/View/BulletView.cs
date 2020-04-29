@@ -10,10 +10,14 @@ namespace Tanks.View
         {
             get
             {
-                bullet = new BulletView();
-                bullet.icon = Image.FromFile(@"Resources\Bullet.png");
                 return bullet;
             }
+        }
+
+        static BulletView()
+        {
+            bullet = new BulletView();
+            bullet.icon = Image.FromFile(@"Resources\Bullet.png");
         }
     }
 }
