@@ -101,6 +101,28 @@ namespace Tanks.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на wwwwwwwwwwwwww
+        ///wggtgggggggtgw
+        ///wggggggggggggw
+        ///wgtgggtggggggw
+        ///wgggfggggfgtgw
+        ///wgggfggggfgggw
+        ///wgggwggggwgggw
+        ///wrrrwggggwgggw
+        ///wgggfggggfgggw
+        ///wgggfggggfgggw
+        ///wgggggggggggrw
+        ///wgggggkgggggrw
+        ///wgggggggggggrw
+        ///wwwwwwwwwwwwww                        .
+        /// </summary>
+        internal static string map {
+            get {
+                return ResourceManager.GetString("map", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap River {

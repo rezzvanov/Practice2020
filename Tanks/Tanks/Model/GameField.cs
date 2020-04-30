@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 
 namespace Tanks.Model
@@ -25,20 +26,7 @@ namespace Tanks.Model
 
         private Random rand = new Random();
 
-        private readonly char[,] map = { { 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w' },
-                                         { 'w', 'g', 'g', 't', 'g', 'g', 'g', 'g', 'g', 'g', 'g', 't', 'g', 'w' },
-                                         { 'w', 'g', 'g', 'g', 'g', 'g', 'g', 'g', 'g', 'g', 'g', 'g', 'g', 'w' },
-                                         { 'w', 'g', 't', 'g', 'g', 'g', 't', 'g', 'g', 'g', 'g', 'g', 'g', 'w' },
-                                         { 'w', 'g', 'g', 'g', 'f', 'g', 'g', 'g', 'g', 'f', 'g', 't', 'g', 'w' },
-                                         { 'w', 'g', 'g', 'g', 'f', 'g', 'g', 'g', 'g', 'f', 'g', 'g', 'g', 'w' },
-                                         { 'w', 'g', 'g', 'g', 'w', 'g', 'g', 'g', 'g', 'w', 'g', 'g', 'g', 'w' },
-                                         { 'w', 'r', 'r', 'r', 'w', 'g', 'g', 'g', 'g', 'w', 'g', 'g', 'g', 'w' },
-                                         { 'w', 'g', 'g', 'g', 'f', 'g', 'g', 'g', 'g', 'f', 'g', 'g', 'g', 'w' },
-                                         { 'w', 'g', 'g', 'g', 'f', 'g', 'g', 'g', 'g', 'f', 'g', 'g', 'g', 'w' },
-                                         { 'w', 'g', 'g', 'g', 'g', 'g', 'g', 'g', 'g', 'g', 'g', 'g', 'r', 'w' },
-                                         { 'w', 'g', 'g', 'g', 'g', 'g', 'k', 'g', 'g', 'g', 'g', 'g', 'r', 'w' },
-                                         { 'w', 'g', 'g', 'g', 'g', 'g', 'g', 'g', 'g', 'g', 'g', 'g', 'r', 'w' },
-                                         { 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w' }};
+        private string[] map;
 
 
         public List<Wall> walls = new List<Wall>();
@@ -53,19 +41,21 @@ namespace Tanks.Model
         public GameField(Size sizeField, int pace, int numbersOfTanks, int numbersOfApples)
         {
             SizeField = sizeField;
-            SpawnObjectsOnАield(numbersOfTanks, numbersOfApples);
+            SpawnObjectsOnField(numbersOfTanks, numbersOfApples);
             GameSpeed = 1000 / pace;
             Timer.Interval = GameSpeed;
             dt = Timer.Interval;
         }
 
-        private void SpawnObjectsOnАield(int numbersOfTanks, int numbersOfApples)
+        private void SpawnObjectsOnField(int numbersOfTanks, int numbersOfApples)
         {
-            for (int i = 0; i < map.GetLength(0); i++)
+            ReadTextFile();
+
+            for (int i = 0; i < map.Length; i++)
             {
-                for (int j = 0; j < map.GetLength(1); j++)
+                for (int j = 0; j < map[i].Length; j++)
                 {
-                    switch (map[j, i])
+                    switch (map[j][i])
                     {
                         case 'g':
                             continue;
@@ -90,6 +80,14 @@ namespace Tanks.Model
             SpawnApples(numbersOfApples);
         }
 
+        private void ReadTextFile()
+        {
+            if (map == null)
+            {
+                map = File.ReadAllLines(@"Resources\map.txt", System.Text.Encoding.Default);
+            }
+        }
+
         private void SpawnTanks(int numbersOfTanks, int i, int j)
         {
             tanks.Add(new Tank(new Point(i * scale, j * scale), SizeCell, (Direction)rand.Next(0, 4)));
@@ -102,7 +100,7 @@ namespace Tanks.Model
                 int posX = rand.Next(0, SizeField.Width / scale);
                 int posY = rand.Next(0, SizeField.Height / scale);
 
-                if (map[posY, posX] == 'g')
+                if (map[posY][posX] == 'g')
                 {
                     apples.Add(new Apple(new Point(posX * scale, posY * scale), SizeCell));
                 }
@@ -175,7 +173,7 @@ namespace Tanks.Model
                 {
                     if (tanks[i].hitBox.IntersectsWith(tanks[z].hitBox))
                     {
-                        if(i == z)
+                        if (i == z)
                         {
                             break;
                         }
@@ -185,7 +183,7 @@ namespace Tanks.Model
                         break;
                     }
                 }
-      
+
                 int chanceOfShot = rand.Next(0, 51);
 
                 if (chanceOfShot == 50)
@@ -286,7 +284,7 @@ namespace Tanks.Model
         {
             foreach (GameObject i in gameObjects)
             {
-                if (i.hitBox.IntersectsWith(Kolobok.hitBox))
+                if (i.hitBox.IntersectsWith(kolobok.hitBox))
                 {
                     return true;
                 }
@@ -365,7 +363,7 @@ namespace Tanks.Model
             fragileBlocks = new List<FragileBlock>();
             Score = 0;
             Updatescore();
-            SpawnObjectsOnАield(5, 5);
+            SpawnObjectsOnField(5, 5);
         }
 
         private void UpdateObjectData()
